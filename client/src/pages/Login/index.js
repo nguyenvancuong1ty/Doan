@@ -3,15 +3,31 @@ import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
 import Button from '~/components/Button';
 import images from '~/assets/images';
+import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
 function Login() {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
-    const [check, setCheck] = useState(false)
+    const [check, setCheck] = useState(false);
     const handleSubmit = () => {
-        console.log({ email, pass, check });
+        axios({
+            method: 'Post',
+            url: 'http://localhost:3000/v1/api/login',
+            data: {
+                username: email,
+                password: pass,
+            },
+        })
+            .then((data) => {
+                alert('Login ok... !');
+                console.log(data.data);
+            })
+            .catch((error) => {
+                alert('invalid username or password');
+                console.log(error);
+            });
     };
     return (
         <div className={cx('wrapper')}>
@@ -42,7 +58,7 @@ function Login() {
                             />
                         </div>
                         <div className={cx('item-left__ghinho')}>
-                            <input type="checkbox" id="ghinho" checked = {check} onChange={() => setCheck(!check)}/>
+                            <input type="checkbox" id="ghinho" checked={check} onChange={() => setCheck(!check)} />
                             <label htmlFor="ghinho">Ghi nhớ tài khoản</label>
                         </div>
                         <Button login onClick={handleSubmit}>
