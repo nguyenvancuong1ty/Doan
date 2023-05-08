@@ -1,0 +1,33 @@
+.wrapper{
+    font-size: 1.6rem;
+    font-weight: 700;
+    min-width: 100px;
+    padding: 9px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid transparent;
+}
+
+.primary{
+    color: #fff;
+    background-color: #fe2c55;
+
+    &:hover{
+        background: linear-gradient(0deg, rgba(0,0,0,0.06), rgba(0,0,0,0.06)), #fe2c55;
+    }
+}
+
+.login{
+    width: 100%;
+    background-color:#FF6600;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #fff;
+    border-bottom: .2rem solid #853703;
+    transition: all .25s ease-in;
+    margin-bottom: 1.6rem;
+    &:hover{
+        background: linear-gradient(0deg, rgba(0,0,0,0.06), rgba(0,0,0,0.06)), #f3680b;
+    }
+}
