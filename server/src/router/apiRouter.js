@@ -36,10 +36,11 @@ const {
     // apiDeleteCakeDetail,
     // apiSearch,
 } = require('../controllers/apiController');
+const { apiLogin } = require('../controllers/AccountController');
 // user
 router.get('/users', apiGetUsers);
 // router.post('/users', apiCreateUser);
-// router.post('/login', apiLogin);
+router.post('/login', apiLogin);
 // router.delete('/users', apiDeleteUser);
 // router.put('/users', apiUpdateUser);
 // //end
