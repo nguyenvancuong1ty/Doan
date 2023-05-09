@@ -4,10 +4,11 @@ import styles from './Login.module.scss';
 import Button from '~/components/Button';
 import images from '~/assets/images';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function Login() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [check, setCheck] = useState(false);
@@ -22,7 +23,7 @@ function Login() {
         })
             .then((data) => {
                 alert('Login ok... !');
-                console.log(data.data);
+                navigate('/');
             })
             .catch((error) => {
                 alert('invalid username or password');
