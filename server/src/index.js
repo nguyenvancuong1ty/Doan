@@ -1,24 +1,28 @@
-// import express from 'express';
 let cors = require('cors');
 const express = require('express');
-//import scss
 const configViewEngine = require('./config/configViewEngine');
-//import .env get
 require('dotenv').config();
+const path = require('path');
 const apiRouter = require('./router/apiRouter');
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(cors());
+
 app.use(express.json()); // config req.body
+
 app.use(express.urlencoded({ extended: true }));
 
-//use
-configViewEngine(app);
-app.use('/v1/api', apiRouter);
+app.use('/static', express.static(path.join(__dirname, 'public'))); //config static file
 
-//use
+configViewEngine(app);
+
+app.get('/', (req, res) => {
+    res.send('homepage');
+});
+
+app.use('/v1/api', apiRouter);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

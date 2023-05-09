@@ -1,98 +1,70 @@
 const express = require('express');
 const router = express.Router();
 const {
-    apiGetUsers,
-    // apiCreateUser,
-    // apiDeleteUser,
-    // apiUpdateUser,
-    // apiLogin,
-    // apiGetInfo,
-    // apiGetCakes,
-    // apiAddCake,
-    // apiUpdateCake,
-    // apiGetNewProduct,
-    // apiGetVoucher,
-    // apiAddVoucher,
-    // apiUpdateVoucher,
-    // apiDeleteVoucher,
-    // apiGetCakedatil,
-    // apiGetCakedatilA,
-    // apiAddCakeDetail,
-    // apiUpdateCakeDetail,
-    // apiGetNews,
-    // apiAddNews,
-    // apiUpdateNews,
-    // apiDeleteNews,
-    // apiGetRecipe,
-    // apiAddRecipe,
-    // apiUpdateRecipe,
-    // apiDeleteRecipe,
-    // apiGetCart,
-    // apiGetCartById,
-    // apiPutCart,
-    // apiDeleteCart,
-    // apiAddCart,
-    // apiDeleteCakes,
-    // apiDeleteCakeDetail,
-    // apiSearch,
-} = require('../controllers/apiController');
-const { apiLogin } = require('../controllers/AccountController');
-// user
-router.get('/users', apiGetUsers);
-// router.post('/users', apiCreateUser);
+    apiLogin,
+    apiCreateAccount,
+    apiUpdateAccount,
+    apiGetAccount,
+    apiDeleteAccount,
+} = require('../controllers/AccountController');
+const {
+    apiGetDiemDanh,
+    apiCreateDiemDanh,
+    apiUpdateDiemDanh,
+    apiDeleteDiemDanh,
+} = require('../controllers/DiemDanhController');
+const {
+    apiGetNhuCauHoc,
+    apiCreateNhuCauHoc,
+    apiUpdateNhuCauHoc,
+    apiDeleteNhuCauHoc,
+} = require('../controllers/NhuCauHocController');
+const {
+    apiGetDangKyNhuCau,
+    apiCreateDangKyNhuCau,
+    apiUpdateDangKyNhuCau,
+    apiDeleteDangKyNhuCau,
+} = require('../controllers/DangKiNhuCauController');
+const {
+    apiGetBangDiem,
+    apiCreateBangDiem,
+    apiUpdateBangDiem,
+    apiDeleteBangDiem,
+} = require('../controllers/BangDiemController');
+
+// account
+router.get('/users', apiGetAccount);
+router.post('/users', apiCreateAccount);
 router.post('/login', apiLogin);
-// router.delete('/users', apiDeleteUser);
-// router.put('/users', apiUpdateUser);
+router.delete('/users', apiDeleteAccount);
+router.put('/users/:id', apiUpdateAccount);
 // //end
 
-// // info
-// router.get('/intro', apiGetInfo);
-// //cake
-// router.get('/cakes', apiGetCakes);
-// router.post('/cakes', apiAddCake);
-// router.put('/cakes', apiUpdateCake);
-// router.delete('/cakes', apiDeleteCakes);
+// // DiemDanh
+router.get('/attendance', apiGetDiemDanh);
+router.post('/attendance', apiCreateDiemDanh);
+router.put('/attendance/:id', apiUpdateDiemDanh);
+router.delete('/attendance/:id', apiDeleteDiemDanh);
+// end
 
-// //newProduct
-// router.get('/newProduct', apiGetNewProduct);
+//nhucauhoc
+router.get('/nhucauhoc', apiGetNhuCauHoc);
+router.post('/nhucauhoc', apiCreateNhuCauHoc);
+router.put('/nhucauhoc/:id', apiUpdateNhuCauHoc);
+router.delete('/nhucauhoc/:id', apiDeleteNhuCauHoc);
+// end
 
-// // Voucher
-// router.get('/voucher', apiGetVoucher);
-// router.post('/voucher', apiAddVoucher);
-// router.put('/voucher', apiUpdateVoucher);
-// router.delete('/voucher', apiDeleteVoucher);
+//dknhucau
+router.get('/dknhucau', apiGetDangKyNhuCau);
+router.post('/dknhucau', apiCreateDangKyNhuCau);
+router.put('/dknhucau/:id', apiUpdateDangKyNhuCau);
+router.delete('/dknhucau/:id', apiDeleteDangKyNhuCau);
+// end
 
-// // Detail cake
-// router.get('/cakedetail/:sale', apiGetCakedatilA);
-// router.get('/cakedetail', apiGetCakedatil);
-// router.delete('/cakedetail', apiDeleteCakeDetail);
-// router.post('/cakedetail', apiAddCakeDetail);
-// router.put('/cakedetail', apiUpdateCakeDetail);
-
-// // News
-// router.get('/news', apiGetNews);
-// router.post('/news', apiAddNews);
-// router.put('/news', apiUpdateNews);
-// router.delete('/news', apiDeleteNews);
-
-// // Cake recipe
-// router.get('/recipe', apiGetRecipe);
-// router.post('/recipe', apiAddRecipe);
-// router.put('/recipe', apiUpdateRecipe);
-// router.delete('/recipe', apiDeleteRecipe);
-
-// // Cart
-// router.get('/cake_by_cart/:userId', apiGetCart);
-
-// router.put('/cake_by_cart', apiPutCart);
-
-// router.delete('/cake_by_cart', apiDeleteCart);
-
-// router.post('/cake_by_cart', apiAddCart);
-
-// router.get('/cart/:userId', apiGetCartById);
-
-// //Search
-// router.post('/search', apiSearch);
-
+//BangDiem
+router.get('/bangdiem', apiGetBangDiem);
+router.post('/bangdiem', apiCreateBangDiem);
+router.put('/bangdiem/:id', apiUpdateBangDiem);
+router.delete('/bangdiem/:id', apiDeleteBangDiem);
+// end
 module.exports = router;
