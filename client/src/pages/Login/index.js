@@ -17,11 +17,12 @@ function Login() {
             method: 'Post',
             url: 'http://localhost:3000/v1/api/login',
             data: {
-                username: email,
+                email: email,
                 password: pass,
             },
         })
             .then((data) => {
+                console.log(data.data);
                 alert('Login ok... !');
                 navigate('/');
             })

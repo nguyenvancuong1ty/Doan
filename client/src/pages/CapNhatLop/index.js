@@ -5,7 +5,6 @@ import Button from '~/components/Button';
 import { useState } from 'react';
 import { ModalPopper } from '../ModalPopper';
 import ModalCapNhatLop from '../ModalPopper/ModalCapNhatLop';
-
 function CapNhatLop() {
     const [modalOpen, setModalOpen] = useState(false);
     return (
