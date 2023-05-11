@@ -21,7 +21,7 @@ const create = async ({ tennhucau }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'delete from nhucauhoc where id = ?';
+    const sql = 'delete from nhucauhoc where manhucau = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;
@@ -31,7 +31,7 @@ const deleted = async ({ id }) => {
 };
 
 const update = async ({ tennhucau, id }) => {
-    const sql = 'update nhucauhoc set tennhucau = ? where id = ?';
+    const sql = 'update nhucauhoc set tennhucau = ? where manhucau = ?';
     try {
         const [result] = await connection.query(sql, [tennhucau, id]);
         return result;
@@ -40,4 +40,15 @@ const update = async ({ tennhucau, id }) => {
     }
 };
 
-module.exports = { create, update, deleted, getAll };
+const pagination = async ({ limit, page }) => {
+    const offset = (page - 1) * limit;
+    const sql = `select * from nhucauhoc limit ${limit} offset ${offset}`;
+    try {
+        const [result] = limit && page && (await connection.query(sql));
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
+module.exports = { create, update, deleted, getAll, pagination };

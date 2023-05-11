@@ -11,6 +11,17 @@ const getAll = async () => {
     }
 };
 
+const pagination = async ({ limit, page }) => {
+    const offset = (page - 1) * limit;
+    const sql = `select * from diemdanh limit ${limit} offset ${offset}`;
+    try {
+        const [result] = limit && page && (await connection.query(sql));
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
 const create = async ({ id_student, id_course, status }) => {
     const sql = 'insert into DiemDanh(id_student,id_course,date, status) values(?,?,?,?)';
     try {
@@ -41,4 +52,4 @@ const update = async ({ id_student, id_course, status, id }) => {
     }
 };
 
-module.exports = { create, update, deleted, getAll };
+module.exports = { create, update, deleted, getAll, pagination };

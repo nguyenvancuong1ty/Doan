@@ -30,14 +30,26 @@ const deleted = async ({ id }) => {
     }
 };
 
-const update = async ({ tennhucau, id }) => {
-    const sql = 'update BangDiem set tennhucau = ? where id = ?';
+const update = async ({ masv, diemA, diemB, diemC, id }) => {
+    const sql = 'update BangDiem set masv =?, diemA =?, diemB =?, diemC = ? where id = ?';
     try {
-        const [result] = await connection.query(sql, [tennhucau, id]);
+        const [result] = await connection.query(sql, [masv, diemA, diemB, diemC, id]);
         return result;
     } catch (e) {
         return false;
     }
 };
 
-module.exports = { create, update, deleted, getAll };
+const pagination = async ({ limit, page }) => {
+    const offset = (page - 1) * limit;
+    const sql = `select * from bangdiem limit ${limit} offset ${offset}`;
+    try {
+        const [result] = limit && page && (await connection.query(sql));
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
+
+module.exports = { create, update, deleted, getAll, pagination };
