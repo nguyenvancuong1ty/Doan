@@ -33,6 +33,7 @@ const {
     apiCreateBangDiem,
     apiUpdateBangDiem,
     apiDeleteBangDiem,
+    apiBangDiemPagination,
 } = require('../controllers/BangDiemController');
 const { apiUploadAvatar } = require('../controllers/UpLoadAvatarController');
 const {
@@ -55,6 +56,8 @@ const {
     apiDeleteCourse,
     apiCoursePagination,
 } = require('../controllers/CourseController');
+const { apiGetLop, apiCreateLop, apiUpdateLop, apiDeleteLop, apiLopPagination, apiGetLopByName } = require('../controllers/LopController');
+const { apiGetNhomLop, apiCreateNhomLop, apiUpdateNhomLop, apiDeleteNhomLop, apiNhomLopPagination } = require('../controllers/NhomLopController');
 
 // account
 router.get('/users', apiGetAccount);
@@ -103,7 +106,24 @@ router.get('/bangdiem', apiGetBangDiem);
 router.post('/bangdiem', apiCreateBangDiem);
 router.put('/bangdiem/:id', apiUpdateBangDiem);
 router.delete('/bangdiem/:id', apiDeleteBangDiem);
-router.get('/bangdiem/pagination', apiCoursePagination);
+router.get('/bangdiem/pagination', apiBangDiemPagination);
+// end
+
+//Lop
+router.get('/lop', apiGetLop);
+router.post('/lop', apiCreateLop);
+router.put('/lop/:id', apiUpdateLop);
+router.delete('/lop/:id', apiDeleteLop);
+router.get('/lop/pagination', apiLopPagination);
+router.get('/lop/search', apiGetLopByName);
+// end
+
+//Nhomlop
+router.get('/nhomlop', apiGetNhomLop);
+router.post('/nhomlop', apiCreateNhomLop);
+router.put('/nhomlop/:id', apiUpdateNhomLop);
+router.delete('/nhomlop/:id', apiDeleteNhomLop);
+router.get('/nhomlop/pagination', apiNhomLopPagination);
 // end
 
 //Student

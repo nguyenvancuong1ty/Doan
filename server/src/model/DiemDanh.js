@@ -2,7 +2,7 @@ const connection = require('../config/connect');
 const date = new Date().toISOString().slice(0, 10);
 
 const getAll = async () => {
-    const sql = 'select * from diemdanh';
+    const sql = 'select * from diemdanh where deleted = false';
     try {
         const [result] = await connection.query(sql);
         return result;
@@ -13,7 +13,7 @@ const getAll = async () => {
 
 const pagination = async ({ limit, page }) => {
     const offset = (page - 1) * limit;
-    const sql = `select * from diemdanh limit ${limit} offset ${offset}`;
+    const sql = `select * from diemdanh where deleted = false limit ${limit} offset ${offset}`;
     try {
         const [result] = limit && page && (await connection.query(sql));
         return result;

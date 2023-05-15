@@ -1,7 +1,7 @@
 const connection = require('../config/connect');
 
 const getAll = async () => {
-    const sql = 'select * from dknhucauhoc';
+    const sql = 'select * from dknhucauhoc where deleted = false';
     try {
         const [result] = await connection.query(sql);
         return result;

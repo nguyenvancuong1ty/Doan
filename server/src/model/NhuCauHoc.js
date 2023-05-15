@@ -1,7 +1,7 @@
 const connection = require('../config/connect');
 
 const getAll = async () => {
-    const sql = 'select * from nhucauhoc';
+    const sql = 'select * from nhucauhoc where deleted = false';
     try {
         const [result] = await connection.query(sql);
         return result;
@@ -42,7 +42,7 @@ const update = async ({ tennhucau, id }) => {
 
 const pagination = async ({ limit, page }) => {
     const offset = (page - 1) * limit;
-    const sql = `select * from nhucauhoc limit ${limit} offset ${offset}`;
+    const sql = `select * from nhucauhoc where deleted = false limit ${limit} offset ${offset}`;
     try {
         const [result] = limit && page && (await connection.query(sql));
         return result;

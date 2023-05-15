@@ -1,7 +1,7 @@
 const connection = require('../config/connect');
 
 const getAll = async () => {
-    const sql = 'SELECT * FROM account INNER JOIN student ON account.id = student.id_account ';
+    const sql = 'SELECT * FROM account INNER JOIN student ON account.id = student.id_account where student.deleted = false';
     try {
         const [result] = await connection.query(sql);
         return result;
@@ -69,7 +69,7 @@ const update = async ({ id, id_account, fullname, brithday, id_teacher, id_cours
 
 const pagination = async ({ limit, page }) => {
     const offset = (page - 1) * limit;
-    const sql = `SELECT * FROM account INNER JOIN student ON account.id = student.id_account limit ${limit} offset ${offset}`;
+    const sql = `SELECT * FROM account INNER JOIN student ON account.id = student.id_account where student.deleted = false limit ${limit} offset ${offset}`;
     try {
         const [result] = limit && page && (await connection.query(sql));
         return result;

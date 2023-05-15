@@ -19,7 +19,7 @@ const login = async ({ username, email }) => {
 };
 
 const getAll = async () => {
-    const sql = 'select * from account where account.type_account != "admin"';
+    const sql = 'select * from account where account.type_account != "admin" and deleted = false';
     try {
         const [result] = await connection.query(sql);
         return result;

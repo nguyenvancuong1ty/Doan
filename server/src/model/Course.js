@@ -2,7 +2,7 @@ const connection = require('../config/connect');
 const date = new Date().toISOString().slice(0, 10);
 
 const getAll = async () => {
-    const sql = 'select * from course';
+    const sql = 'select * from course where deleted = false';
     try {
         const [result] = await connection.query(sql);
         return result;

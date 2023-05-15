@@ -1,7 +1,7 @@
 const connection = require('../config/connect');
 
 const getAll = async () => {
-    const sql = 'select * from BangDiem where deleted = false';
+    const sql = 'select * from nhomlop where deleted = false';
     try {
         const [result] = await connection.query(sql);
         return result;
@@ -10,10 +10,10 @@ const getAll = async () => {
     }
 };
 
-const create = async ({ masv, diemA, diemB, diemC }) => {
-    const sql = 'insert into BangDiem(masv, diemA, diemB, diemC) values(?,?,?,?)';
+const create = async ({ manhom, tennhom }) => {
+    const sql = 'insert into nhomlop(manhom, tennhom) values(?,?)';
     try {
-        const [result] = await connection.query(sql, [masv, diemA, diemB, diemC]);
+        const [result] = await connection.query(sql, [manhom, tennhom]);
         return result;
     } catch (e) {
         return false;
@@ -21,7 +21,7 @@ const create = async ({ masv, diemA, diemB, diemC }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'delete from BangDiem where id = ?';
+    const sql = 'delete from nhomlop where id = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;
@@ -30,10 +30,10 @@ const deleted = async ({ id }) => {
     }
 };
 
-const update = async ({ masv, diemA, diemB, diemC, id }) => {
-    const sql = 'update BangDiem set masv =?, diemA =?, diemB =?, diemC = ? where id = ?';
+const update = async ({ tennhom, id }) => {
+    const sql = 'update nhomlop set tennhom =? where manhom = ?';
     try {
-        const [result] = await connection.query(sql, [masv, diemA, diemB, diemC, id]);
+        const [result] = await connection.query(sql, [tennhom, id]);
         return result;
     } catch (e) {
         return false;
@@ -42,7 +42,7 @@ const update = async ({ masv, diemA, diemB, diemC, id }) => {
 
 const pagination = async ({ limit, page }) => {
     const offset = (page - 1) * limit;
-    const sql = `select * from bangdiem limit ${limit} offset ${offset}`;
+    const sql = `select * from nhomlop where deleted = false limit ${limit} offset ${offset}`;
     try {
         const [result] = limit && page && (await connection.query(sql));
         return result;
