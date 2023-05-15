@@ -15,8 +15,8 @@ function CapNhatLopItem(props) {
 
     useEffect(() => {
         const endOffset = itemOffset + itemsPerPage;
-        setCurrentItems(data.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(data.length / itemsPerPage));
+        Array.isArray(data) && setCurrentItems(data.slice(itemOffset, endOffset));
+        Array.isArray(data) &&  setPageCount(Math.ceil(data.length / itemsPerPage));
     }, [itemOffset, itemsPerPage, data]);
 
     const handlePageClick = (event) => {
@@ -40,30 +40,31 @@ function CapNhatLopItem(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {currentItems.map((value) => (
-                        <tr key={value.id}>
-                            <td>{value.id}</td>
-                            <td>{value.name}</td>
-                            <td>{value.name}</td>
-                            <td>{value.email}</td>
-                            <td>{value.age}</td>
-                            <td>
-                                <button className={cx('table-icon')}>
-                                    <FontAwesomeIcon icon={faEye} />
-                                </button>
-                            </td>
-                            <td>
-                                <button className={cx('table-icon')}>
-                                    <FontAwesomeIcon icon={faPenToSquare} />
-                                </button>
-                            </td>
-                            <td>
-                                <button className={cx('table-icon')}>
-                                    <FontAwesomeIcon icon={faXmark} />
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                    {Array.isArray(currentItems) &&
+                        currentItems.map((value, index) => (
+                            <tr key={value.malop}>
+                                <td>{(index + 1) * itemOffset}</td>
+                                <td>{value.malop}</td>
+                                <td style={{ minWidth: 320 }}>{value.tenlop}</td>
+                                <td>{value.manhom}</td>
+                                <td>{value.tennhom}</td>
+                                <td>
+                                    <button className={cx('table-icon')}>
+                                        <FontAwesomeIcon icon={faEye} />
+                                    </button>
+                                </td>
+                                <td>
+                                    <button className={cx('table-icon')}>
+                                        <FontAwesomeIcon icon={faPenToSquare} />
+                                    </button>
+                                </td>
+                                <td>
+                                    <button className={cx('table-icon')}>
+                                        <FontAwesomeIcon icon={faXmark} />
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
             <ReactPaginate

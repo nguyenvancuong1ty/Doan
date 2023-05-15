@@ -14,15 +14,18 @@ const cx = classNames.bind(styles);
 function CapNhatLop() {
     const [modalOpen, setModalOpen] = useState(false);
     const [persons, setPersons] = useState([]);
-    const [query, setQuery] = useState('')
+    const [query, setQuery] = useState('');
 
     useEffect(() => {
         const layDuLieu = async () => {
             try {
+                const url = query
+                    ? `http://localhost:3000/v1/api/lop/search?search=${query}`
+                    : `http://localhost:3000/v1/api/lop`;
                 await axios
-                    .get(`https://jsonplaceholder.typicode.com/users?q=${query}`)
+                    .get(url)
                     .then((res) => {
-                        const persons = res.data;
+                        const persons = res.data.data;
                         setPersons(persons);
                     })
                     .catch((error) => console.log(error));
@@ -50,7 +53,12 @@ function CapNhatLop() {
                     </div>
                     <div className={cx('box-body')}>
                         <div className={cx('search')}>
-                            <input type="text" placeholder="Nhập từ khóa cần tìm..." value={query} onChange={(e) => setQuery(e.target.value)}/>
+                            <input
+                                type="text"
+                                placeholder="Nhập từ khóa cần tìm..."
+                                value={query}
+                                onChange={(e) => setQuery(e.target.value)}
+                            />
                             {/* <button>Tìm kiếm</button> */}
                         </div>
                         <CapNhatLopItem data={persons} />

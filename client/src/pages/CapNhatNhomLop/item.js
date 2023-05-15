@@ -38,11 +38,11 @@ export default function Item(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {currentItems.map((value) => (
-                        <tr key={value.id}>
+                    {currentItems.map((value, index) => (
+                        <tr key={index}>
                             <td>{value.id}</td>
-                            <td>{value.title}</td>
-                            <td>{value.body}</td>
+                            <td>{value.manhom}</td>
+                            <td>{value.tennhom}</td>
                             <td>
                                 <button className={cx('table-icon')} onClick={() => props.reviewPost(value.id)}>
                                     <FontAwesomeIcon icon={faEye}/>

@@ -22,11 +22,14 @@ function CapNhatNhomLop() {
 
     useEffect(() => {
         const layDuLieu = async () => {
+            const url = query
+                ? `http://localhost:3000/v1/api/nhomlop/search?search=${query}`
+                : `http://localhost:3000/v1/api/nhomlop`;
             try {
                 await axios
-                    .get(`https://jsonplaceholder.typicode.com/posts?q=${query}`)
+                    .get(url)
                     .then((res) => {
-                        const persons = res.data;
+                        const persons = res.data.data;
                         setPost(persons);
                     })
                     .catch((error) => console.log(error));
@@ -36,7 +39,7 @@ function CapNhatNhomLop() {
         };
         if (query.length === 0 || query.length > 2) layDuLieu();
         // Khi có post thì sẽ phải nhúng api thực tế vào không phếch api sẽ bị lỗi
-    }, [query , post ]);
+    }, [query, post]);
     const handleAddNew = (data) => {
         let dulieu = post;
         dulieu.unshift(data);
@@ -132,7 +135,7 @@ function CapNhatNhomLop() {
             )}
             {modalEdit && (
                 <ModalPopper setOpenModal={setModalEdit}>
-                    <EditCapNhatNhom setModalEdit={setModalEdit} viewPost={viewPost} handleAddNew={handleAddNew}/>
+                    <EditCapNhatNhom setModalEdit={setModalEdit} viewPost={viewPost} handleAddNew={handleAddNew} />
                 </ModalPopper>
             )}
         </>
