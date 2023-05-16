@@ -21,7 +21,7 @@ const create = async ({ masv, diemA, diemB, diemC }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'delete from BangDiem where id = ?';
+    const sql = 'update BangDiem set deleted = true where id = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;
@@ -42,7 +42,7 @@ const update = async ({ masv, diemA, diemB, diemC, id }) => {
 
 const pagination = async ({ limit, page }) => {
     const offset = (page - 1) * limit;
-    const sql = `select * from bangdiem limit ${limit} offset ${offset}`;
+    const sql = `select * from bangdiem where bangdiem.deleted = false limit ${limit} offset ${offset}`;
     try {
         const [result] = limit && page && (await connection.query(sql));
         return result;

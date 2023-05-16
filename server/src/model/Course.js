@@ -13,7 +13,7 @@ const getAll = async () => {
 
 const pagination = async ({ limit, page }) => {
     const offset = (page - 1) * limit;
-    const sql = `select * from course limit ${limit} offset ${offset}`;
+    const sql = `select * from course where deleted = false limit ${limit} offset ${offset}`;
     try {
         const [result] = await connection.query(sql);
         return result;
@@ -33,7 +33,7 @@ const create = async ({ name, description, status }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'delete from course where id = ?';
+    const sql = 'update course set deleted = true where id = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;

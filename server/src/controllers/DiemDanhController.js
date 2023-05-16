@@ -59,7 +59,7 @@ const apiDeleteDiemDanh = async (req, res) => {
             const result = await deleted({ id });
             if (result) {
                 return res.status(200).json({
-                    message: 'Create DiemDanh ok',
+                    message: 'Delete DiemDanh ok',
                 });
             } else {
                 return res.status(404).json({

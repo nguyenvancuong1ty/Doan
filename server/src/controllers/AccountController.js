@@ -90,7 +90,6 @@ const apiDeleteAccount = async (req, res) => {
         const isAdmin = Authorization(req);
         if (isAdmin) {
             const result = await deleted({ id });
-            console.log(result);
             if (result) {
                 return res.status(200).json({
                     message: 'Delete account ok',

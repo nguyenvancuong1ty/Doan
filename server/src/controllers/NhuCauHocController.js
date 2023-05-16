@@ -59,7 +59,7 @@ const apiDeleteNhuCauHoc = async (req, res) => {
             const result = await deleted({ id });
             if (result) {
                 return res.status(200).json({
-                    message: 'Create NhuCauHoc ok',
+                    message: 'Delete NhuCauHoc ok',
                 });
             } else {
                 return res.status(404).json({

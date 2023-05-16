@@ -21,7 +21,7 @@ const create = async ({ tennhucau }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'delete from nhucauhoc where manhucau = ?';
+    const sql = 'update nhucauhoc set deleted = true where manhucau = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;

@@ -21,7 +21,7 @@ const create = async ({ ngaydangky, taikhoandki, manhucau }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'delete from dknhucauhoc where id = ?';
+    const sql = 'update dknhucauhoc set deleted = true where id = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;

@@ -37,7 +37,7 @@ const create = async ({ masv, id_account, fullname, brithday, id_teacher, id_cou
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'delete from student where masv = ?';
+    const sql = 'update student set deleted = true where masv = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;

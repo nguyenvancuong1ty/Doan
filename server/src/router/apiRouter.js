@@ -63,7 +63,7 @@ const { apiGetNhomLop, apiCreateNhomLop, apiUpdateNhomLop, apiDeleteNhomLop, api
 router.get('/users', apiGetAccount);
 router.post('/users', apiCreateAccount);
 router.post('/login', apiLogin);
-router.delete('/users', apiDeleteAccount);
+router.patch('/users/:id', apiDeleteAccount);
 router.put('/users/:id', apiUpdateAccount);
 router.post('/users/upload/:id', apiUploadAvatar);
 router.get('/users/pagination', apiAccountPagination);
@@ -73,7 +73,7 @@ router.get('/users/pagination', apiAccountPagination);
 router.get('/attendance', apiGetDiemDanh);
 router.post('/attendance', apiCreateDiemDanh);
 router.put('/attendance/:id', apiUpdateDiemDanh);
-router.delete('/attendance/:id', apiDeleteDiemDanh);
+router.patch('/attendance/:id', apiDeleteDiemDanh);
 router.get('/attendance/pagination', apiDiemDanhPagination);
 // end
 
@@ -81,7 +81,7 @@ router.get('/attendance/pagination', apiDiemDanhPagination);
 router.get('/course', apiGetCourse);
 router.post('/course', apiCreateCourse);
 router.put('/course/:id', apiUpdateCourse);
-router.delete('/course/:id', apiDeleteCourse);
+router.patch('/course/:id', apiDeleteCourse);
 router.get('/course/pagination', apiCoursePagination);
 
 // end
@@ -90,7 +90,7 @@ router.get('/course/pagination', apiCoursePagination);
 router.get('/nhucauhoc', apiGetNhuCauHoc);
 router.post('/nhucauhoc', apiCreateNhuCauHoc);
 router.put('/nhucauhoc/:id', apiUpdateNhuCauHoc);
-router.delete('/nhucauhoc/:id', apiDeleteNhuCauHoc);
+router.patch('/nhucauhoc/:id', apiDeleteNhuCauHoc);
 router.get('/nhucauhoc/pagination', apiNhuCauHocPagination);
 // end
 
@@ -98,14 +98,14 @@ router.get('/nhucauhoc/pagination', apiNhuCauHocPagination);
 router.get('/dknhucau', apiGetDangKyNhuCau);
 router.post('/dknhucau', apiCreateDangKyNhuCau);
 router.put('/dknhucau/:id', apiUpdateDangKyNhuCau);
-router.delete('/dknhucau/:id', apiDeleteDangKyNhuCau);
+router.patch('/dknhucau/:id', apiDeleteDangKyNhuCau);
 // end
 
 //BangDiem
 router.get('/bangdiem', apiGetBangDiem);
 router.post('/bangdiem', apiCreateBangDiem);
 router.put('/bangdiem/:id', apiUpdateBangDiem);
-router.delete('/bangdiem/:id', apiDeleteBangDiem);
+router.patch('/bangdiem/:id', apiDeleteBangDiem);
 router.get('/bangdiem/pagination', apiBangDiemPagination);
 // end
 
@@ -113,7 +113,7 @@ router.get('/bangdiem/pagination', apiBangDiemPagination);
 router.get('/lop', apiGetLop);
 router.post('/lop', apiCreateLop);
 router.put('/lop/:id', apiUpdateLop);
-router.delete('/lop/:id', apiDeleteLop);
+router.patch('/lop/:id', apiDeleteLop);
 router.get('/lop/pagination', apiLopPagination);
 router.get('/lop/search', apiGetLopByName);
 // end
@@ -122,7 +122,7 @@ router.get('/lop/search', apiGetLopByName);
 router.get('/nhomlop', apiGetNhomLop);
 router.post('/nhomlop', apiCreateNhomLop);
 router.put('/nhomlop/:id', apiUpdateNhomLop);
-router.delete('/nhomlop/:id', apiDeleteNhomLop);
+router.patch('/nhomlop/:id', apiDeleteNhomLop);
 router.get('/nhomlop/pagination', apiNhomLopPagination);
 // end
 
@@ -130,7 +130,7 @@ router.get('/nhomlop/pagination', apiNhomLopPagination);
 router.get('/student', apiGetStudent);
 router.post('/student', apiCreateStudent);
 router.put('/student/:id', apiUpdateStudent);
-router.delete('/student/:id', apiDeleteStudent);
+router.patch('/student/:id', apiDeleteStudent);
 router.get('/student/pagination', apiStudentPagination);
 
 // end
@@ -139,7 +139,7 @@ router.get('/student/pagination', apiStudentPagination);
 router.get('/teacher', apiGetTeacher);
 router.post('/teacher', apiCreateTeacher);
 router.put('/teacher/:id', apiUpdateTeacher);
-router.delete('/teacher/:id', apiDeleteTeacher);
+router.patch('/teacher/:id', apiDeleteTeacher);
 router.get('/teacher/pagination', apiStudentPagination);
 // end
 module.exports = router;

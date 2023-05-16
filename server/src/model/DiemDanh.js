@@ -33,7 +33,7 @@ const create = async ({ id_student, id_course, status }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'delete from DiemDanh where id = ?';
+    const sql = 'update DiemDanh set deleted = true where id = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;

@@ -21,7 +21,7 @@ const create = async ({ manhom, tennhom }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'delete from nhomlop where id = ?';
+    const sql = 'update nhomlop set deleted = true where id = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;
