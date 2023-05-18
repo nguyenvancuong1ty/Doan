@@ -2,35 +2,37 @@ import React, { useRef, useState } from 'react';
 import Button from '~/components/Button';
 import classNames from 'classnames/bind';
 import styles from '../ModalPopper.module.scss';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const cx = classNames.bind(styles);
 
-function ModuleCapNhatNhomLop({ setOpenModal, handleAddNew }) {
-    const [manhom, setManhom] = useState('');
-    const [tennhom, setTennhom] = useState('');
+function ModuleCapNhatNhomLop({ setOpenModal }) {
+    const [inputData, setInputData] = useState({manhom:'', tennhom:''});
     const textErr = useRef();
+    const navigat = useNavigate()
     const handleSumit = async (e) => {
         e.preventDefault();
-        if (!manhom) {
+        if (!inputData.manhom) {
             textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
             return;
         }
-        if (!tennhom) {
+        if (!inputData.tennhom) {
             textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
             return;
         } else {
             // console.log({ manhom, tennhom });
             textErr.current.innerText = '';
         }
-        let data = {
-            title: manhom,
-            body: tennhom,
-        };
-        let res = await axios.post('https://jsonplaceholder.typicode.com/posts', data);
-        if (res && res.data) {
-            let newData = res.data;
-            handleAddNew(newData);
-        }
+        await axios.post('http://localhost:3000/v1/api/nhomlop',inputData,
+        {
+            headers:{
+                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDM5OTk4MSwiZXhwIjoxNjg0NDAzNTgxfQ.WtWbcZXFvDGbePQmnAycUAI9p7zNb23hvUGeNpkEDpQ"
+            }
+        })
+        .then(res => {
+            alert("Đã thêm thành công")
+            navigat("/capnhatnhomlop")
+        }).catch(err => console.log(err))
     };
     return (
         <>
@@ -46,8 +48,8 @@ function ModuleCapNhatNhomLop({ setOpenModal, handleAddNew }) {
                         id="manhom"
                         name="manhom"
                         placeholder="Mã nhóm"
-                        value={manhom}
-                        onChange={(e) => setManhom(e.target.value)}
+                        value={inputData.manhom}
+                        onChange={(e) => setInputData({...inputData, manhom: e.target.value})}
                     />
                 </div>
                 <div className={cx('group-form')}>
@@ -59,8 +61,8 @@ function ModuleCapNhatNhomLop({ setOpenModal, handleAddNew }) {
                         id="tennhom"
                         name="tennhom"
                         placeholder="Tên nhóm"
-                        value={tennhom}
-                        onChange={(e) => setTennhom(e.target.value)}
+                        value={inputData.tennhom}
+                        onChange={(e) => setInputData({...inputData, tennhom: e.target.value})}
                     />
                 </div>
             </div>
