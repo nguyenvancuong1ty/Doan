@@ -36,7 +36,6 @@ function CapNhatHocVienItem (props){
                         <th>Email</th>
                         <th>Số điện thoại</th>
                         <th>Mã lớp</th>
-                        <th>Ngày đăng ký</th>
                         <th>Xem chi tiết</th>
                         <th>Sửa</th>
                         <th>Xóa</th>
@@ -55,7 +54,6 @@ function CapNhatHocVienItem (props){
                                 <td>{value.email}</td>
                                 <td>{value.phone}</td>
                                 <td>{value.website}</td>
-                                <td style={{ minWidth: 320 }}>{value.website}</td>
                                 <td>
                                     <button className={cx('table-icon')}>
                                         <FontAwesomeIcon icon={faEye} />
