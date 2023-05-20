@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import styles from './CapNhatNhuCauHoc.module.scss'
+import styles from './DangKyLichHoc.module.scss'
 import Button from '~/components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import CapNhatNhuCauHocItem from './CapNhatNhuCauHocItem';
 import axios from 'axios';
-
+import { useEffect, useState } from 'react';
+import DangKyLichHocItem from './DangKyLichHocItem';
 const cx = classNames.bind(styles)
-function CapNhatNhuCauHoc() {
-    // const [modalOpen, setModalOpen] = useState(false);
+
+function DangKyLichHoc() {
     const [persons, setPersons] = useState([]);
     const [query, setQuery] = useState('');
-
     useEffect(() => {
         const layDuLieu = async () => {
             try {
                 const url = query
-                    ? `https://jsonplaceholder.typicode.com/todos?q=${query}`
-                    : `https://jsonplaceholder.typicode.com/todos`;
+                    ? `https://jsonplaceholder.typicode.com/users?q=${query}`
+                    : `https://jsonplaceholder.typicode.com/users`;
                 await axios
                     .get(url)
                     .then((res) => {
@@ -37,7 +35,7 @@ function CapNhatNhuCauHoc() {
             <div className={cx('wrapper')}>
                 <div className={cx('container')}>
                     <div className={cx('box-title')}>
-                        <h1 className={cx('title')}>Cập nhật nhu cầu học </h1>
+                        <h1 className={cx('title')}>Đăng ký lịch học </h1>
                         <Button
                             capnhatlop
                             primary
@@ -57,17 +55,12 @@ function CapNhatNhuCauHoc() {
                                 onChange={(e) => setQuery(e.target.value)}
                             />
                         </div>
-                        <CapNhatNhuCauHocItem data={persons}/>
+                        <DangKyLichHocItem data={persons}/>
                     </div>
                 </div>
             </div>
-            {/* {modalOpen && (
-                <ModalPopper setOpenModal={setModalOpen}>
-                    <ModalCapNhatLop setOpenModal={setModalOpen} />
-                </ModalPopper>
-            )} */}
         </>
     );
 }
 
-export default CapNhatNhuCauHoc;
+export default DangKyLichHoc;
