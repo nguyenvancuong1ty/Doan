@@ -7,6 +7,7 @@ const {
     apiGetAccount,
     apiDeleteAccount,
     apiAccountPagination,
+    apiGetAccountByName,
 } = require('../controllers/AccountController');
 const {
     apiGetDiemDanh,
@@ -56,8 +57,21 @@ const {
     apiDeleteCourse,
     apiCoursePagination,
 } = require('../controllers/CourseController');
-const { apiGetLop, apiCreateLop, apiUpdateLop, apiDeleteLop, apiLopPagination, apiGetLopByName } = require('../controllers/LopController');
-const { apiGetNhomLop, apiCreateNhomLop, apiUpdateNhomLop, apiDeleteNhomLop, apiNhomLopPagination } = require('../controllers/NhomLopController');
+const {
+    apiGetLop,
+    apiCreateLop,
+    apiUpdateLop,
+    apiDeleteLop,
+    apiLopPagination,
+    apiGetLopByName,
+} = require('../controllers/LopController');
+const {
+    apiGetNhomLop,
+    apiCreateNhomLop,
+    apiUpdateNhomLop,
+    apiDeleteNhomLop,
+    apiNhomLopPagination,
+} = require('../controllers/NhomLopController');
 
 // account
 router.get('/users', apiGetAccount);
@@ -67,6 +81,7 @@ router.patch('/users/:id', apiDeleteAccount);
 router.put('/users/:id', apiUpdateAccount);
 router.post('/users/upload/:id', apiUploadAvatar);
 router.get('/users/pagination', apiAccountPagination);
+router.get('/users/search', apiGetAccountByName);
 // //end
 
 // // DiemDanh

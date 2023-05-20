@@ -61,6 +61,17 @@ const deleted = async ({ id }) => {
     }
 };
 
+const deleteDeep = async ({ id }) => {
+    connection.beginTransaction;
+    const sql = 'update account set deleted = true where id = ?';
+    try {
+        connection.const[result] = await connection.query(sql, [id]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
 const update = async ({ username, hash, avatar, id }) => {
     const sql = 'update account set username = ?,password = ?,avata = ? where id = ?';
     try {
@@ -82,4 +93,15 @@ const pagination = async ({ limit, page }) => {
     }
 };
 
-module.exports = { login, create, update, deleted, getAll, pagination };
+const getByName = async ({ search }) => {
+    const sql = `select * from account where account.username like '%${search.search}%' 
+                 and deleted = false`;
+    try {
+        const [result] = await connection.query(sql);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
+module.exports = { login, create, update, deleted, getAll, pagination, getByName, deleteDeep };

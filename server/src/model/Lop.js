@@ -33,7 +33,7 @@ const create = async ({ malop, tenlop, manhom }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'update Lop set deleted = true where id = ?';
+    const sql = 'update Lop set deleted = true where malop = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;

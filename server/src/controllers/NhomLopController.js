@@ -2,6 +2,26 @@ const { create, deleted, update, getAll, pagination } = require('../model/NhomLo
 const { Authorization } = require('../middleware/Authorization');
 require('dotenv').config();
 
+const apiGetNhomLopByName = async (req, res) => {
+    const search = req.query;
+    try {
+        const result = await getByName({ search });
+        if (result) {
+            return res.status(200).json({
+                statusCode: 200,
+                data: result,
+            });
+        } else {
+            return res.status(404).json({
+                message: 'Data not found',
+            });
+        }
+    } catch (e) {
+        return res.status(500).json({
+            message: e.message,
+        });
+    }
+};
 const apiGetNhomLop = async (req, res) => {
     try {
         const result = await getAll();
@@ -78,7 +98,7 @@ const apiDeleteNhomLop = async (req, res) => {
 
 const apiUpdateNhomLop = async (req, res) => {
     try {
-        const {  tennhom } = req.body;
+        const { tennhom } = req.body;
         const { id } = req.params;
         const isAdmin = Authorization(req);
         if (isAdmin) {
@@ -125,4 +145,11 @@ const apiNhomLopPagination = async (req, res) => {
     }
 };
 
-module.exports = { apiCreateNhomLop, apiDeleteNhomLop, apiUpdateNhomLop, apiGetNhomLop, apiNhomLopPagination };
+module.exports = {
+    apiGetNhomLopByName,
+    apiCreateNhomLop,
+    apiDeleteNhomLop,
+    apiUpdateNhomLop,
+    apiGetNhomLop,
+    apiNhomLopPagination,
+};

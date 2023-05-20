@@ -4,6 +4,27 @@ const { create, deleted, update, getAll, pagination } = require('../model/DiemDa
 const { Authorization } = require('../middleware/Authorization');
 require('dotenv').config();
 
+const apiGetDiemDanhByName = async (req, res) => {
+    const search = req.query;
+    try {
+        const result = await getByName({ search });
+        if (result) {
+            return res.status(200).json({
+                statusCode: 200,
+                data: result,
+            });
+        } else {
+            return res.status(404).json({
+                message: 'Data not found',
+            });
+        }
+    } catch (e) {
+        return res.status(500).json({
+            message: e.message,
+        });
+    }
+};
+
 const apiGetDiemDanh = async (req, res) => {
     try {
         const result = await getAll();
@@ -120,4 +141,11 @@ const apiDiemDanhPagination = async (req, res) => {
     }
 };
 
-module.exports = { apiCreateDiemDanh, apiDeleteDiemDanh, apiUpdateDiemDanh, apiGetDiemDanh, apiDiemDanhPagination };
+module.exports = {
+    apiGetDiemDanhByName,
+    apiCreateDiemDanh,
+    apiDeleteDiemDanh,
+    apiUpdateDiemDanh,
+    apiGetDiemDanh,
+    apiDiemDanhPagination,
+};

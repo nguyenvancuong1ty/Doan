@@ -21,7 +21,7 @@ const create = async ({ manhom, tennhom }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'update nhomlop set deleted = true where id = ?';
+    const sql = 'update nhomlop set deleted = true where manhom = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;
@@ -50,6 +50,5 @@ const pagination = async ({ limit, page }) => {
         return false;
     }
 };
-
 
 module.exports = { create, update, deleted, getAll, pagination };
