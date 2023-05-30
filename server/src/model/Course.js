@@ -52,4 +52,26 @@ const update = async ({ name, description, status, id }) => {
     }
 };
 
-module.exports = { create, update, deleted, getAll, pagination };
+const getById = async ({ id }) => {
+    const sql = 'select * from course where deleted = false and id = ?';
+    try {
+        const [result] = await connection.query(sql, [id]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
+const getByName = async ({ search }) => {
+    console.log(search);
+    const sql = `select * from course where name like '%${search.search}%' 
+                 and deleted = false`;
+    try {
+        const [result] = await connection.query(sql);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
+module.exports = { create, update, deleted, getAll, pagination, getById, getByName };

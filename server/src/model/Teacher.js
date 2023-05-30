@@ -40,7 +40,7 @@ const deleted = async ({ id }) => {
 const update = async ({ id_account, fullname, birthday, id }) => {
     const sql = 'update Teacher set id_account = ?,fullname = ?,birthday = ? where magv = ?';
     try {
-        const [result] = await connection.query(sql, [ id_account, fullname, birthday, id]);
+        const [result] = await connection.query(sql, [id_account, fullname, birthday, id]);
         return result;
     } catch (e) {
         return false;
@@ -57,5 +57,25 @@ const pagination = async ({ limit, page }) => {
         return false;
     }
 };
+const getById = async ({ id }) => {
+    const sql = 'select * from teacher where deleted = false and magv = ?';
+    try {
+        const [result] = await connection.query(sql, [id]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
 
-module.exports = { create, update, deleted, getAll, pagination };
+const getByName = async ({ search }) => {
+    console.log(search);
+    const sql = `select * from teacher where fullname like '%${search.search}%' 
+                 and deleted = false`;
+    try {
+        const [result] = await connection.query(sql, [search.search]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+module.exports = { create, update, deleted, getAll, pagination, getById, getByName };

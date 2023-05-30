@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { create, deleted, update, getAll } = require('../model/DangKiNhuCau');
+const { create, deleted, update, getAll, getById, getByName } = require('../model/DangKiNhuCau');
 const { Authorization } = require('../middleware/Authorization');
 require('dotenv').config();
 
@@ -8,6 +8,26 @@ const apiGetDangKyNhuCauByName = async (req, res) => {
     const search = req.query;
     try {
         const result = await getByName({ search });
+        if (result) {
+            return res.status(200).json({
+                statusCode: 200,
+                data: result,
+            });
+        } else {
+            return res.status(404).json({
+                message: 'Data not found',
+            });
+        }
+    } catch (e) {
+        return res.status(500).json({
+            message: e.message,
+        });
+    }
+};
+const apiGetDangKyNhuCauById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await getById({ id });
         if (result) {
             return res.status(200).json({
                 statusCode: 200,
@@ -126,4 +146,5 @@ module.exports = {
     apiDeleteDangKyNhuCau,
     apiUpdateDangKyNhuCau,
     apiGetDangKyNhuCau,
+    apiGetDangKyNhuCauById,
 };

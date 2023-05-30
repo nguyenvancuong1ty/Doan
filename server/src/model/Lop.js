@@ -62,5 +62,14 @@ const pagination = async ({ limit, page }) => {
         return false;
     }
 };
+const getById = async ({ id }) => {
+    const sql = 'select * from diemdanh where deleted = false and id = ?';
+    try {
+        const [result] = await connection.query(sql, [id]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
 
-module.exports = { create, update, deleted, getAll, getByName, pagination };
+module.exports = { create, update, deleted, getAll, getByName, getById, pagination };

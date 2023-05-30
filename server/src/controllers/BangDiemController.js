@@ -1,9 +1,29 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { create, deleted, update, getAll, pagination } = require('../model/BangDiem');
+const { create, deleted, update, getAll, pagination, getById, getByName } = require('../model/BangDiem');
 const { Authorization } = require('../middleware/Authorization');
 require('dotenv').config();
 
+const apiGetBangDiemById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await getById({ id });
+        if (result) {
+            return res.status(200).json({
+                statusCode: 200,
+                data: result,
+            });
+        } else {
+            return res.status(404).json({
+                message: 'Data not found',
+            });
+        }
+    } catch (e) {
+        return res.status(500).json({
+            message: e.message,
+        });
+    }
+};
 const apiGetBangDiemByName = async (req, res) => {
     const search = req.query;
     try {
@@ -155,4 +175,5 @@ module.exports = {
     apiUpdateBangDiem,
     apiGetBangDiem,
     apiBangDiemPagination,
+    apiGetBangDiemById,
 };

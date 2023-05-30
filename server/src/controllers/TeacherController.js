@@ -1,4 +1,4 @@
-const { create, deleted, update, getAll, pagination } = require('../model/Teacher');
+const { create, deleted, update, getAll, pagination, getById, getByName } = require('../model/Teacher');
 const { Authorization } = require('../middleware/Authorization');
 require('dotenv').config();
 
@@ -22,7 +22,26 @@ const apiGetTeacherByName = async (req, res) => {
         });
     }
 };
-
+const apiGetTeacherById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await getById({ id });
+        if (result) {
+            return res.status(200).json({
+                statusCode: 200,
+                data: result,
+            });
+        } else {
+            return res.status(404).json({
+                message: 'Data not found',
+            });
+        }
+    } catch (e) {
+        return res.status(500).json({
+            message: e.message,
+        });
+    }
+};
 const apiGetTeacher = async (req, res) => {
     try {
         const result = await getAll();
@@ -150,4 +169,5 @@ module.exports = {
     apiGetTeacher,
     apiTeacherPagination,
     apiGetTeacherByName,
+    apiGetTeacherById,
 };

@@ -52,4 +52,25 @@ const update = async ({ id_student, id_course, status, id }) => {
     }
 };
 
-module.exports = { create, update, deleted, getAll, pagination };
+const getById = async ({ id }) => {
+    const sql = 'select * from diemdanh where deleted = false and id = ?';
+    try {
+        const [result] = await connection.query(sql, [id]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
+const getByName = async ({ search }) => {
+    console.log(search);
+    const sql = 'select * from diemdanh where deleted = false and masv = ?';
+    try {
+        const [result] = await connection.query(sql, [search.search]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
+module.exports = { create, update, deleted, getAll, pagination, getById, getByName };

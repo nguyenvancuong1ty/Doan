@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { create, deleted, update, getAll, pagination, getByName } = require('../model/Lop');
+const { create, deleted, update, getAll, pagination, getByName, getById } = require('../model/Lop');
 const { Authorization } = require('../middleware/Authorization');
 require('dotenv').config();
 
@@ -24,7 +24,26 @@ const apiGetLopByName = async (req, res) => {
         });
     }
 };
-
+const apiGetLopById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await getById({ id });
+        if (result) {
+            return res.status(200).json({
+                statusCode: 200,
+                data: result,
+            });
+        } else {
+            return res.status(404).json({
+                message: 'Data not found',
+            });
+        }
+    } catch (e) {
+        return res.status(500).json({
+            message: e.message,
+        });
+    }
+};
 const apiGetLop = async (req, res) => {
     try {
         const result = await getAll();
@@ -148,4 +167,12 @@ const apiLopPagination = async (req, res) => {
     }
 };
 
-module.exports = { apiCreateLop, apiDeleteLop, apiUpdateLop, apiGetLop, apiGetLopByName, apiLopPagination };
+module.exports = {
+    apiCreateLop,
+    apiDeleteLop,
+    apiUpdateLop,
+    apiGetLop,
+    apiGetLopByName,
+    apiLopPagination,
+    apiGetLopById,
+};

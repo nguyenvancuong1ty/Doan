@@ -50,5 +50,25 @@ const pagination = async ({ limit, page }) => {
         return false;
     }
 };
+const getById = async ({ id }) => {
+    const sql = 'select * from nhucauhoc where deleted = false and manhucau = ?';
+    try {
+        const [result] = await connection.query(sql, [id]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
 
-module.exports = { create, update, deleted, getAll, pagination };
+const getByName = async ({ search }) => {
+    console.log(search);
+    const sql = `select * from nhucauhoc where tennhucau like '%${search.search}%' 
+                 and deleted = false`;
+    try {
+        const [result] = await connection.query(sql, [search.search]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+module.exports = { create, update, deleted, getAll, pagination, getById, getByName };

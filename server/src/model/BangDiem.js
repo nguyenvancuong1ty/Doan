@@ -1,5 +1,26 @@
 const connection = require('../config/connect');
 
+const getById = async ({ id }) => {
+    const sql = 'select * from bangdiem where deleted = false and id = ?';
+    try {
+        const [result] = await connection.query(sql, [id]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
+const getByName = async ({ search }) => {
+    console.log(search);
+    const sql = 'select * from bangdiem where deleted = false and masv = ?';
+    try {
+        const [result] = await connection.query(sql, [search.search]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
 const getAll = async () => {
     const sql = 'select * from BangDiem where deleted = false';
     try {
@@ -51,5 +72,4 @@ const pagination = async ({ limit, page }) => {
     }
 };
 
-
-module.exports = { create, update, deleted, getAll, pagination };
+module.exports = { create, update, deleted, getAll, pagination, getById, getByName };

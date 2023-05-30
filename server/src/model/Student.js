@@ -1,7 +1,8 @@
 const connection = require('../config/connect');
 
 const getAll = async () => {
-    const sql = 'SELECT * FROM account INNER JOIN student ON account.id = student.id_account where student.deleted = false';
+    const sql =
+        'SELECT * FROM account INNER JOIN student ON account.id = student.id_account where student.deleted = false';
     try {
         const [result] = await connection.query(sql);
         return result;
@@ -77,5 +78,25 @@ const pagination = async ({ limit, page }) => {
         return false;
     }
 };
+const getById = async ({ id }) => {
+    const sql = 'select * from student where deleted = false and masv = ?';
+    try {
+        const [result] = await connection.query(sql, [id]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
 
-module.exports = { create, update, deleted, getAll, pagination };
+const getByName = async ({ search }) => {
+    console.log(search);
+    const sql = `select * from student where fullname like '%${search.search}%' 
+                 and deleted = false`;
+    try {
+        const [result] = await connection.query(sql, [search.search]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+module.exports = { create, update, deleted, getAll, pagination, getById, getByName };
