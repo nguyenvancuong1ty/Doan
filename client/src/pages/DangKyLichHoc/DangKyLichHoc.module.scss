@@ -1,0 +1,105 @@
+.wrapper {
+    .box-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .title {
+            font-size: 2.8rem;
+            color: #222;
+        }
+    }
+    .box-body {
+        margin: 16px 0;
+        .search {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 16px;
+            button {
+                font-size: 1.6rem;
+                font-weight: 600;
+                background-color: #10558d;
+                margin-left: 8px;
+                padding: 8px 16px;
+                border-radius: 4px;
+                color: #fff;
+                transition: all 0.25s ease-in;
+                cursor: pointer;
+                &:hover {
+                    box-shadow: 2px 2px 4px #333;
+                }
+            }
+            input {
+                padding: 8px 16px;
+                max-width: 400px;
+                min-width: 380px;
+                font-size: 1.6rem;
+                border: 1px solid #ccc;
+                outline: none;
+            }
+        }
+        .table {
+            text-align: center;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            width: 100%;
+            td,
+            th {
+                border: 1px solid #449be3;
+                padding: 8px;
+            }
+            tr {
+                // &:nth-child(even) {
+                //     background-color: rgb(170, 168, 168);
+                // }
+                &:hover {
+                    background-color: rgba(204, 204, 204, 0.4);
+                }
+            }
+            td {
+                border: 1px solid #ccc;
+            }
+            th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: center;
+                background-color: #10558d;
+                color: #fff;
+            }
+            .table-icon {
+                font-size: 2.2rem;
+                padding: 4px 8px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                &:hover {
+                    color: #d32109;
+                }
+            }
+        }
+        .pagination {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5rem;
+            font-size: 1.6rem;
+            gap: 8px;
+            margin-top: 32px;
+            .page-num {
+                background-color: rgb(227, 224, 224);
+                padding: 8px 16px;
+                cursor: pointer;
+                border-radius: 4px;
+                font-weight: 400;
+                &:hover{
+                    background-color: rgba(16, 85, 141, .4);
+                }
+            }
+            .active{
+                background-color: #10558d;
+                color: #fff;
+            }
+        }
+    }
+}
