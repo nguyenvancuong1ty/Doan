@@ -6,8 +6,7 @@ const cx = classNames.bind(styles)
 function DoiMatKhau() {
   return (
     <div>
-      fgfdg
-    </div>
+Đổi mật khẩu    </div>
   )
 }
 
