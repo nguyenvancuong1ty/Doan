@@ -60,7 +60,7 @@ function CapNhatNhomLop() {
                 );
             })
             .catch((error) => console.log(error));
-        
+
         //    Xóa bên người dùng khi F5 sẽ hiện lại
         // let dulieu = post;
         // dulieu = dulieu.filter((item) => item.id !== id);
@@ -130,7 +130,11 @@ function CapNhatNhomLop() {
             )}
             {modalReview && (
                 <ModalPopper setOpenModal={setModalReview}>
-                    <ReviewCapNhatNhom setModalReview={setModalReview} viewPost={viewPost} setModalEdit={setModalEdit}/>
+                    <ReviewCapNhatNhom
+                        setModalReview={setModalReview}
+                        viewPost={viewPost}
+                        setModalEdit={setModalEdit}
+                    />
                 </ModalPopper>
             )}
             {modalEdit && (

@@ -23,33 +23,20 @@ function ModuleCapNhatNhomLop({ setOpenModal }) {
             // console.log({ manhom, tennhom });
             textErr.current.innerText = '';
         }
-<<<<<<< HEAD
         await axios
             .post('http://localhost:3000/v1/api/nhomlop', inputData, {
                 headers: {
                     Authorization:
-                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDQwNDg4MSwiZXhwIjoxNjg0NDA4NDgxfQ.D6rCpKP5fGgPnjhmN4x01oQVDjnoRh5JViaPeIzVRaM',
+                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDYxMzM5MiwiZXhwIjoxNjg0NjE2OTkyfQ.QqJp9b6HX_kDQGpc2_7O6DXWhrcX-7ppQOFPPv666Ko',
                 },
             })
             .then((res) => {
                 alert('Đã thêm thành công');
                 navigat('/capnhatnhomlop');
+                setOpenModal(false);
+                window.location.reload();
             })
             .catch((err) => console.log(err));
-=======
-        await axios.post('http://localhost:3000/v1/api/nhomlop',inputData,
-        {
-            headers:{
-                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDYxMzM5MiwiZXhwIjoxNjg0NjE2OTkyfQ.QqJp9b6HX_kDQGpc2_7O6DXWhrcX-7ppQOFPPv666Ko"
-            }
-        })
-        .then(res => {
-            alert("Đã thêm thành công")
-            navigat("/capnhatnhomlop")
-            setOpenModal(false)
-            window.location.reload();
-        }).catch(err => console.log(err))
->>>>>>> e5916d15a0e4d594f2fcc4a7ac57dd74865d7caa
     };
     return (
         <>
