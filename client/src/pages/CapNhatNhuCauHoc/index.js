@@ -6,10 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import CapNhatNhuCauHocItem from './CapNhatNhuCauHocItem';
 import axios from 'axios';
+import { ModalPopper } from '../ModalPopper';
+import ModuleCapNhatNhuCauHoc from '../ModalPopper/CapNhatNhuCauHoc/ModuleCapNhatNhuCauHoc';
 
 const cx = classNames.bind(styles)
 function CapNhatNhuCauHoc() {
-    // const [modalOpen, setModalOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
     const [persons, setPersons] = useState([]);
     const [query, setQuery] = useState('');
 
@@ -17,12 +19,12 @@ function CapNhatNhuCauHoc() {
         const layDuLieu = async () => {
             try {
                 const url = query
-                    ? `https://jsonplaceholder.typicode.com/todos?q=${query}`
-                    : `https://jsonplaceholder.typicode.com/todos`;
+                    ? `http://localhost:3000/v1/api/nhucauhoc?search=${query}`
+                    : `http://localhost:3000/v1/api/nhucauhoc`;
                 await axios
                     .get(url)
                     .then((res) => {
-                        const persons = res.data;
+                        const persons = res.data.data;
                         setPersons(persons);
                     })
                     .catch((error) => console.log(error));
@@ -41,9 +43,9 @@ function CapNhatNhuCauHoc() {
                         <Button
                             capnhatlop
                             primary
-                            // onClick={() => {
-                            //     setModalOpen(true);
-                            // }}
+                            onClick={() => {
+                                setModalOpen(true);
+                            }}
                         >
                             <FontAwesomeIcon icon={faUserPlus} />
                         </Button>
@@ -61,11 +63,11 @@ function CapNhatNhuCauHoc() {
                     </div>
                 </div>
             </div>
-            {/* {modalOpen && (
+            {modalOpen && (
                 <ModalPopper setOpenModal={setModalOpen}>
-                    <ModalCapNhatLop setOpenModal={setModalOpen} />
+                    <ModuleCapNhatNhuCauHoc setOpenModal={setModalOpen} />
                 </ModalPopper>
-            )} */}
+            )}
         </>
     );
 }

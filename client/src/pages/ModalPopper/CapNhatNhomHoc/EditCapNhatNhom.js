@@ -6,8 +6,8 @@ import axios from 'axios';
 const cx = classNames.bind(styles);
 
 function EditCapNhatNhom({ setModalEdit, viewPost, handleAddNew }) {
-    const [manhom, setManhom] = useState(viewPost.title);
-    const [tennhom, setTennhom] = useState(viewPost.body);
+    const [manhom, setManhom] = useState(viewPost.data[0].manhom);
+    const [tennhom, setTennhom] = useState(viewPost.data[0].tennhom);
     const textErr = useRef();
     const handleSumit = async (e) => {
         e.preventDefault();
@@ -23,11 +23,12 @@ function EditCapNhatNhom({ setModalEdit, viewPost, handleAddNew }) {
             // console.log({ manhom, tennhom });
             textErr.current.innerText = '';
         }
-        let data = {
-            title: manhom,
-            body: tennhom,
-        };
-        let res = await axios.put(`https://jsonplaceholder.typicode.com/posts?id=${viewPost.id}`, data);
+        let res = await axios.put(`http://localhost:3000/v1/api/nhomlop/${manhom}`,
+        {
+            headers:{
+                Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDYxMzM5MiwiZXhwIjoxNjg0NjE2OTkyfQ.QqJp9b6HX_kDQGpc2_7O6DXWhrcX-7ppQOFPPv666Ko"
+            }
+        })
         if (res && res.data) {
             let newData = res.data;
             handleAddNew(newData);

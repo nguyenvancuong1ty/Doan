@@ -27,15 +27,12 @@ function CapNhatHocVienItem (props){
          <table className={cx('table')}>
                 <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>Tên tài khoản</th>
+                        <th>Mã sinh viên</th>
                         <th>Họ và tên</th>
-                        <th>Giới tính</th>
                         <th>Ngày sinh</th>
                         <th>Địa chỉ</th>
                         <th>Email</th>
                         <th>Số điện thoại</th>
-                        <th>Mã lớp</th>
                         <th>Xem chi tiết</th>
                         <th>Sửa</th>
                         <th>Xóa</th>
@@ -45,15 +42,12 @@ function CapNhatHocVienItem (props){
                     {Array.isArray(currentItems) &&
                         currentItems.map((value, index) => (
                             <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{value.username}</td>
-                                <td>{value.name}</td>
-                                <td>{index}</td>
-                                <td>{index}</td>
-                                <td>{value.address.street}</td>
+                                <td>{value.masv}</td>
+                                <td>{value.fullname}</td>
+                                <td>{value.brithday}</td>
+                                <td>{value.address}</td>
                                 <td>{value.email}</td>
                                 <td>{value.phone}</td>
-                                <td>{value.website}</td>
                                 <td>
                                     <button className={cx('table-icon')}>
                                         <FontAwesomeIcon icon={faEye} />

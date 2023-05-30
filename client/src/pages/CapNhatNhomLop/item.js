@@ -11,7 +11,7 @@ export default function Item(props) {
     const [currentItems, setCurrentItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [itemOffset, setItemOffset] = useState(0);
-    const itemsPerPage = 20;
+    const itemsPerPage = 8;
 
     useEffect(() => {
         const endOffset = itemOffset + itemsPerPage;
@@ -29,7 +29,6 @@ export default function Item(props) {
             <table className={cx('table')}>
                 <thead>
                     <tr>
-                        <th>STT</th>
                         <th>Mã nhóm</th>
                         <th>Tên nhóm</th>
                         <th>Xem chi tiết</th>
@@ -40,16 +39,15 @@ export default function Item(props) {
                 <tbody>
                     {currentItems.map((value, index) => (
                         <tr key={index}>
-                            <td>{value.id}</td>
                             <td>{value.manhom}</td>
                             <td>{value.tennhom}</td>
                             <td>
-                                <button className={cx('table-icon')} onClick={() => props.reviewPost(value.id)}>
+                                <button className={cx('table-icon')} onClick={() => props.reviewPost(value.manhom)}>
                                     <FontAwesomeIcon icon={faEye}/>
                                 </button>
                             </td>
                             <td>
-                                <button className={cx('table-icon')} onClick={() => props.editPost(value.id)}>
+                                <button className={cx('table-icon')} onClick={() => props.editPost(value.manhom)}>
                                     <FontAwesomeIcon icon={faPenToSquare} />
                                 </button>
                             </td>

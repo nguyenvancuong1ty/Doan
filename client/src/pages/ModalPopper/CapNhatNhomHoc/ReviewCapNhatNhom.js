@@ -4,7 +4,11 @@ import classNames from 'classnames/bind';
 import styles from '../ModalPopper.module.scss';
 const cx = classNames.bind(styles);
 
-function ReviewCapNhatNhom({ setModalReview, viewPost }) {
+function ReviewCapNhatNhom({ setModalReview, viewPost, setModalEdit }) {
+    const handleClick = () => {
+        setModalReview(false);
+        setModalEdit(true)
+    }
     return (
         <>
             <h2 className={cx('title')}>Xem nhóm học</h2>
@@ -13,13 +17,13 @@ function ReviewCapNhatNhom({ setModalReview, viewPost }) {
                     <label htmlFor="manhom">
                         Mã nhóm :
                     </label>
-                    <p className={cx('group-form--text')}>{viewPost.title}</p>
+                    <p className={cx('group-form--text')}>{viewPost.data[0].manhom}</p>
                 </div>
                 <div className={cx('group-form')}>
                     <label htmlFor="tennhom">
                         Tên nhóm :
                     </label>
-                    <p className={cx('group-form--text')}>{viewPost.body}</p>
+                    <p className={cx('group-form--text')}>{viewPost.data[0].tennhom}</p>
                 </div>
             </div>
             <div className={cx('footer')}>
@@ -32,7 +36,7 @@ function ReviewCapNhatNhom({ setModalReview, viewPost }) {
                     Quay lại
                 </Button>
 
-                <Button blus>
+                <Button blus onClick={handleClick}>
                     Sửa
                 </Button>
             </div>

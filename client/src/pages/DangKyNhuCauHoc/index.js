@@ -6,21 +6,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import DangKyNhuCauHocItem from './DangKyNhuCauHocItem';
+import { ModalPopper } from '../ModalPopper';
+import ModuleDangKyNhuCauHoc from '../ModalPopper/DangKyNhuCauHoc/ModuleDangKyNhuCauHoc';
 const cx = classNames.bind(styles)
 
 const DangKyNhuCauHoc = () => {
+    const [modalOpen, setModalOpen] = useState(false);
     const [persons, setPersons] = useState([]);
     const [query, setQuery] = useState('');
     useEffect(() => {
         const layDuLieu = async () => {
             try {
                 const url = query
-                    ? `https://jsonplaceholder.typicode.com/users?q=${query}`
-                    : `https://jsonplaceholder.typicode.com/users`;
+                    ? `http://localhost:3000/v1/api/dknhucau?search=${query}`
+                    : `http://localhost:3000/v1/api/dknhucau`;
                 await axios
                     .get(url)
                     .then((res) => {
-                        const persons = res.data;
+                        const persons = res.data.data;
                         setPersons(persons);
                     })
                     .catch((error) => console.log(error));
@@ -39,9 +42,9 @@ const DangKyNhuCauHoc = () => {
                         <Button
                             capnhatlop
                             primary
-                            // onClick={() => {
-                            //     setModalOpen(true);
-                            // }}
+                            onClick={() => {
+                                setModalOpen(true);
+                            }}
                         >
                             <FontAwesomeIcon icon={faUserPlus} />
                         </Button>
@@ -59,6 +62,11 @@ const DangKyNhuCauHoc = () => {
                     </div>
                 </div>
             </div>
+            {modalOpen && (
+                <ModalPopper setOpenModal={setModalOpen}>
+                    <ModuleDangKyNhuCauHoc setOpenModal={setModalOpen} />
+                </ModalPopper>
+            )}
         </>
     );
 };

@@ -39,7 +39,7 @@ function CapNhatNhomLop() {
         };
         if (query.length === 0 || query.length > 2) layDuLieu();
         // Khi có post thì sẽ phải nhúng api thực tế vào không phếch api sẽ bị lỗi
-    }, [query, post]);
+    }, [query]);
     const handleAddNew = (data) => {
         let dulieu = post;
         dulieu.unshift(data);
@@ -50,8 +50,8 @@ function CapNhatNhomLop() {
         // Phần xóa tham khảo link: https://hocwebchuan.com/tutorial/reactjs/reactjs_mysql_delete.php
 
         // Xóa khi gọi api
-        /* await axios
-            .delete(`https://jsonplaceholder.typicode.com/posts?id=${id}`)
+        await axios
+            .delete(`http://localhost:3000/v1/api/nhomlop/${id}`)
             .then((res) => {
                 setPost(
                     post.filter((item) => {
@@ -60,15 +60,15 @@ function CapNhatNhomLop() {
                 );
             })
             .catch((error) => console.log(error));
-        */
+        
         //    Xóa bên người dùng khi F5 sẽ hiện lại
-        let dulieu = post;
-        dulieu = dulieu.filter((item) => item.id !== id);
-        setPost(dulieu);
+        // let dulieu = post;
+        // dulieu = dulieu.filter((item) => item.id !== id);
+        // setPost(dulieu);
     };
     const reviewPost = async (id) => {
         await axios
-            .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+            .get(`http://localhost:3000/v1/api/nhomlop/${id}`)
             .then((res) => {
                 const persons = res.data;
                 setViewPost(persons);
@@ -79,7 +79,7 @@ function CapNhatNhomLop() {
     };
     const editPost = async (id) => {
         await axios
-            .get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+            .get(`http://localhost:3000/v1/api/nhomlop/${id}`)
             .then((res) => {
                 const persons = res.data;
                 setViewPost(persons);
@@ -130,7 +130,7 @@ function CapNhatNhomLop() {
             )}
             {modalReview && (
                 <ModalPopper setOpenModal={setModalReview}>
-                    <ReviewCapNhatNhom setModalReview={setModalReview} viewPost={viewPost} />
+                    <ReviewCapNhatNhom setModalReview={setModalReview} viewPost={viewPost} setModalEdit={setModalEdit}/>
                 </ModalPopper>
             )}
             {modalEdit && (

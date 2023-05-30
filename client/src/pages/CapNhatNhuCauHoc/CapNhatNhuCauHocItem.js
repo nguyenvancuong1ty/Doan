@@ -38,8 +38,8 @@ function CapNhatNhuCauHocItem (props){
                     {Array.isArray(currentItems) &&
                         currentItems.map((value, index) => (
                             <tr key={index}>
-                                <td>{value.id}</td>
-                                <td style={{ minWidth: 320 }}>{value.title}</td>
+                                <td>{value.manhucau}</td>
+                                <td style={{ minWidth: 320 }}>{value.tennhucau}</td>
                                 <td>
                                     <button className={cx('table-icon')}>
                                         <FontAwesomeIcon icon={faEye} />

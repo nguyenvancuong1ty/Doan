@@ -6,37 +6,23 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const cx = classNames.bind(styles);
 
-function ModuleCapNhatNhomLop({ setOpenModal }) {
-    const [inputData, setInputData] = useState({ manhom: '', tennhom: '' });
+function ModuleCapNhatNhuCauHoc({setOpenModal}) {
+    const [inputData, setInputData] = useState({manhucau:'', tennhucau:''});
     const textErr = useRef();
-    const navigat = useNavigate();
+    const navigat = useNavigate()
     const handleSumit = async (e) => {
         e.preventDefault();
-        if (!inputData.manhom) {
+        if (!inputData.manhucau) {
             textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
             return;
         }
-        if (!inputData.tennhom) {
+        if (!inputData.tennhucau) {
             textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
             return;
         } else {
-            // console.log({ manhom, tennhom });
+            // console.log({ manhucau, tennhucau });
             textErr.current.innerText = '';
         }
-<<<<<<< HEAD
-        await axios
-            .post('http://localhost:3000/v1/api/nhomlop', inputData, {
-                headers: {
-                    Authorization:
-                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDQwNDg4MSwiZXhwIjoxNjg0NDA4NDgxfQ.D6rCpKP5fGgPnjhmN4x01oQVDjnoRh5JViaPeIzVRaM',
-                },
-            })
-            .then((res) => {
-                alert('Đã thêm thành công');
-                navigat('/capnhatnhomlop');
-            })
-            .catch((err) => console.log(err));
-=======
         await axios.post('http://localhost:3000/v1/api/nhomlop',inputData,
         {
             headers:{
@@ -49,37 +35,37 @@ function ModuleCapNhatNhomLop({ setOpenModal }) {
             setOpenModal(false)
             window.location.reload();
         }).catch(err => console.log(err))
->>>>>>> e5916d15a0e4d594f2fcc4a7ac57dd74865d7caa
     };
-    return (
-        <>
-            <h2 className={cx('title')}>Thêm nhóm học</h2>
+    
+  return (
+    <>
+            <h2 className={cx('title')}>Thêm nhu cầu học</h2>
             <p className={cx('item-left__error')} ref={textErr}></p>
             <div className={cx('body')}>
                 <div className={cx('group-form')}>
-                    <label htmlFor="manhom">
-                        Mã nhóm <span>*</span>:
+                    <label htmlFor="manhucau">
+                        Mã nhu cầu <span>*</span>:
                     </label>
                     <input
                         type="text"
-                        id="manhom"
-                        name="manhom"
-                        placeholder="Mã nhóm"
-                        value={inputData.manhom}
-                        onChange={(e) => setInputData({ ...inputData, manhom: e.target.value })}
+                        id="manhucau"
+                        name="manhucau"
+                        placeholder="manhucau"
+                        value={inputData.manhucau}
+                        onChange={(e) => setInputData({...inputData, manhucau: e.target.value})}
                     />
                 </div>
                 <div className={cx('group-form')}>
-                    <label htmlFor="tennhom">
-                        Tên nhóm <span>*</span>:
+                    <label htmlFor="tennhucau">
+                        Tên nhu cầu <span>*</span>:
                     </label>
                     <input
                         type="text"
-                        id="tennhom"
-                        name="tennhom"
-                        placeholder="Tên nhóm"
-                        value={inputData.tennhom}
-                        onChange={(e) => setInputData({ ...inputData, tennhom: e.target.value })}
+                        id="tennhucau"
+                        name="tennhucau"
+                        placeholder="tennhucau"
+                        value={inputData.tennhucau}
+                        onChange={(e) => setInputData({...inputData, tennhucau: e.target.value})}
                     />
                 </div>
             </div>
@@ -98,7 +84,7 @@ function ModuleCapNhatNhomLop({ setOpenModal }) {
                 </Button>
             </div>
         </>
-    );
+  )
 }
 
-export default ModuleCapNhatNhomLop;
+export default ModuleCapNhatNhuCauHoc

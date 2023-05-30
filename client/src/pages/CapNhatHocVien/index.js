@@ -6,20 +6,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import CapNhatHocVienItem from './CapNhatHocVienItem';
+import { ModalPopper } from '../ModalPopper';
+import ModuleCapNhatHocVien from '../ModalPopper/CapNhatHocVien/ModuleCapNhatHocVien';
 const cx = classNames.bind(styles)
 function CapNhatHocVien() {
+    const [modalOpen, setModalOpen] = useState(false);
     const [persons, setPersons] = useState([]);
     const [query, setQuery] = useState('');
     useEffect(() => {
         const layDuLieu = async () => {
             try {
                 const url = query
-                    ? `https://jsonplaceholder.typicode.com/users?q=${query}`
-                    : `https://jsonplaceholder.typicode.com/users`;
+                    ? `http://localhost:3000/v1/api/student?search=${query}`
+                    : `http://localhost:3000/v1/api/student`;
                 await axios
                     .get(url)
                     .then((res) => {
-                        const persons = res.data;
+                        const persons = res.data.data;
                         setPersons(persons);
                     })
                     .catch((error) => console.log(error));
@@ -38,9 +41,9 @@ function CapNhatHocVien() {
                         <Button
                             capnhatlop
                             primary
-                            // onClick={() => {
-                            //     setModalOpen(true);
-                            // }}
+                            onClick={() => {
+                                setModalOpen(true);
+                            }}
                         >
                             <FontAwesomeIcon icon={faUserPlus} />
                         </Button>
@@ -58,6 +61,11 @@ function CapNhatHocVien() {
                     </div>
                 </div>
             </div>
+            {modalOpen && (
+                <ModalPopper setOpenModal={setModalOpen}>
+                    <ModuleCapNhatHocVien setOpenModal={setModalOpen} />
+                </ModalPopper>
+            )}
         </>
     );
 }
