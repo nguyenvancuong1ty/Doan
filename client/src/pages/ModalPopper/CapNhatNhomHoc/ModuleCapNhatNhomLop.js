@@ -7,9 +7,9 @@ import axios from 'axios';
 const cx = classNames.bind(styles);
 
 function ModuleCapNhatNhomLop({ setOpenModal }) {
-    const [inputData, setInputData] = useState({manhom:'', tennhom:''});
+    const [inputData, setInputData] = useState({ manhom: '', tennhom: '' });
     const textErr = useRef();
-    const navigat = useNavigate()
+    const navigat = useNavigate();
     const handleSumit = async (e) => {
         e.preventDefault();
         if (!inputData.manhom) {
@@ -23,16 +23,18 @@ function ModuleCapNhatNhomLop({ setOpenModal }) {
             // console.log({ manhom, tennhom });
             textErr.current.innerText = '';
         }
-        await axios.post('http://localhost:3000/v1/api/nhomlop',inputData,
-        {
-            headers:{
-                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDM5OTk4MSwiZXhwIjoxNjg0NDAzNTgxfQ.WtWbcZXFvDGbePQmnAycUAI9p7zNb23hvUGeNpkEDpQ"
-            }
-        })
-        .then(res => {
-            alert("Đã thêm thành công")
-            navigat("/capnhatnhomlop")
-        }).catch(err => console.log(err))
+        await axios
+            .post('http://localhost:3000/v1/api/nhomlop', inputData, {
+                headers: {
+                    Authorization:
+                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDQwNDg4MSwiZXhwIjoxNjg0NDA4NDgxfQ.D6rCpKP5fGgPnjhmN4x01oQVDjnoRh5JViaPeIzVRaM',
+                },
+            })
+            .then((res) => {
+                alert('Đã thêm thành công');
+                navigat('/capnhatnhomlop');
+            })
+            .catch((err) => console.log(err));
     };
     return (
         <>
@@ -49,7 +51,7 @@ function ModuleCapNhatNhomLop({ setOpenModal }) {
                         name="manhom"
                         placeholder="Mã nhóm"
                         value={inputData.manhom}
-                        onChange={(e) => setInputData({...inputData, manhom: e.target.value})}
+                        onChange={(e) => setInputData({ ...inputData, manhom: e.target.value })}
                     />
                 </div>
                 <div className={cx('group-form')}>
@@ -62,7 +64,7 @@ function ModuleCapNhatNhomLop({ setOpenModal }) {
                         name="tennhom"
                         placeholder="Tên nhóm"
                         value={inputData.tennhom}
-                        onChange={(e) => setInputData({...inputData, tennhom: e.target.value})}
+                        onChange={(e) => setInputData({ ...inputData, tennhom: e.target.value })}
                     />
                 </div>
             </div>

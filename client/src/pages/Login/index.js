@@ -17,7 +17,7 @@ function Login() {
             method: 'Post',
             url: 'http://localhost:3000/v1/api/login',
             data: {
-                email: email,
+                username: email,
                 password: pass,
             },
         })
