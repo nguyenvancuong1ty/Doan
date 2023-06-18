@@ -4,7 +4,8 @@ import styles from './Login.module.scss';
 import Button from '~/components/Button';
 import images from '~/assets/images';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';import { useDispatch } from 'react-redux';
+import { setAvatar } from '~/redux';
 const cx = classNames.bind(styles);
 
 function Login() {
@@ -12,6 +13,7 @@ function Login() {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [check, setCheck] = useState(false);
+    const dispatch = useDispatch();
     const handleSubmit = () => {
         axios({
             method: 'Post',
@@ -21,16 +23,18 @@ function Login() {
                 password: pass,
             },
         })
-            .then((data) => {
-                console.log(data.data);
-                alert('Login ok... !');
-                navigate('/');
+        .then((data) => {
+            console.log(data.data);
+            dispatch(setAvatar(data.data.data))
+            localStorage.setItem('token', data.data.token)
+            alert('Login ok... !');
+            navigate('/home');
             })
             .catch((error) => {
                 alert('invalid username or password');
                 console.log(error);
             });
-    };
+        };
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
@@ -88,3 +92,4 @@ function Login() {
 }
 
 export default Login;
+

@@ -2,37 +2,39 @@ import React, { useRef, useState } from 'react';
 import Button from '~/components/Button';
 import classNames from 'classnames/bind';
 import styles from '../ModalPopper.module.scss';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const cx = classNames.bind(styles);
 
 function EditCapNhatNhom({ setModalEdit, viewPost, handleAddNew }) {
-    const [manhom, setManhom] = useState(viewPost.data[0].manhom);
-    const [tennhom, setTennhom] = useState(viewPost.data[0].tennhom);
+    const [inputData, setInputData] = useState({ manhom: viewPost.data[0].manhom, tennhom: viewPost.data[0].tennhom });
     const textErr = useRef();
+    const navigat = useNavigate();
     const handleSumit = async (e) => {
         e.preventDefault();
         setModalEdit(false);
-        if (!manhom) {
+        if (!inputData.manhom) {
             textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
             return;
         }
-        if (!tennhom) {
+        if (!inputData.tennhom) {
             textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
             return;
         } else {
             // console.log({ manhom, tennhom });
             textErr.current.innerText = '';
         }
-        let res = await axios.put(`http://localhost:3000/v1/api/nhomlop/${manhom}`,
+        await axios.put(`http://localhost:3000/v1/api/nhomlop/${inputData.manhom}`,inputData,
         {
             headers:{
-                Authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDYxMzM5MiwiZXhwIjoxNjg0NjE2OTkyfQ.QqJp9b6HX_kDQGpc2_7O6DXWhrcX-7ppQOFPPv666Ko"
+                Authorization:"Bearer "+localStorage.getItem('token')
             }
         })
-        if (res && res.data) {
-            let newData = res.data;
-            handleAddNew(newData);
-        }
+        .then(res => {
+            alert('Cập nhật nhóm học thành công!!')
+            navigat('/capnhatnhomlop')
+            window.location.reload();
+        })
     };
     return (
         <>
@@ -48,8 +50,9 @@ function EditCapNhatNhom({ setModalEdit, viewPost, handleAddNew }) {
                         id="manhom"
                         name="manhom"
                         placeholder="Mã nhóm"
-                        value={manhom}
-                        onChange={(e) => setManhom(e.target.value)}
+                        value={inputData.manhom}
+                        onChange={(e) => setInputData({...inputData, manhom: e.target.value})}
+                        disabled
                     />
                 </div>
                 <div className={cx('group-form')}>
@@ -61,8 +64,8 @@ function EditCapNhatNhom({ setModalEdit, viewPost, handleAddNew }) {
                         id="tennhom"
                         name="tennhom"
                         placeholder="Tên nhóm"
-                        value={tennhom}
-                        onChange={(e) => setTennhom(e.target.value)}
+                        value={inputData.tennhom}
+                        onChange={(e) => setInputData({...inputData, tennhom: e.target.value})}
                     />
                 </div>
             </div>

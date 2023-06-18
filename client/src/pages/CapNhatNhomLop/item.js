@@ -53,7 +53,7 @@ export default function Item(props) {
                             </td>
                             <td>
                                 <button className={cx('table-icon')}>
-                                    <FontAwesomeIcon icon={faXmark} onClick={() => props.deletePost(value.id)}/>
+                                    <FontAwesomeIcon icon={faXmark} onClick={() => props.deletePost(value.manhom)}/>
                                 </button>
                             </td>
                         </tr>

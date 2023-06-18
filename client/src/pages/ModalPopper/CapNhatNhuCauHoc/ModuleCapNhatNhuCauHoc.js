@@ -23,15 +23,15 @@ function ModuleCapNhatNhuCauHoc({setOpenModal}) {
             // console.log({ manhucau, tennhucau });
             textErr.current.innerText = '';
         }
-        await axios.post('http://localhost:3000/v1/api/nhomlop',inputData,
+        await axios.post('http://localhost:3000/v1/api/nhucauhoc',inputData,
         {
             headers:{
-                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDYxMzM5MiwiZXhwIjoxNjg0NjE2OTkyfQ.QqJp9b6HX_kDQGpc2_7O6DXWhrcX-7ppQOFPPv666Ko"
+                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NzA1NzAyNSwiZXhwIjoxNjg3MDYwNjI1fQ.IcNmfK7--ZfeBE_uyXLiwxp4Blqp-867_0N6I977tN4"
             }
         })
         .then(res => {
             alert("Đã thêm thành công")
-            navigat("/capnhatnhomlop")
+            navigat("/capnhatnhucauhoc")
             setOpenModal(false)
             window.location.reload();
         }).catch(err => console.log(err))
@@ -50,7 +50,7 @@ function ModuleCapNhatNhuCauHoc({setOpenModal}) {
                         type="text"
                         id="manhucau"
                         name="manhucau"
-                        placeholder="manhucau"
+                        placeholder="Mã nhu cầu"
                         value={inputData.manhucau}
                         onChange={(e) => setInputData({...inputData, manhucau: e.target.value})}
                     />
@@ -63,7 +63,7 @@ function ModuleCapNhatNhuCauHoc({setOpenModal}) {
                         type="text"
                         id="tennhucau"
                         name="tennhucau"
-                        placeholder="tennhucau"
+                        placeholder="Tên nhu cầu"
                         value={inputData.tennhucau}
                         onChange={(e) => setInputData({...inputData, tennhucau: e.target.value})}
                     />

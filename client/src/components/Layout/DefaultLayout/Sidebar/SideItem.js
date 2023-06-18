@@ -9,7 +9,7 @@ function SideItem({ items = [] }) {
     return (
         <>
             {items.map((value) => (
-                <li key={value.id}>
+                <li key={value.id} onClick = {value.onClick}>
                     <NavLink to={value.link} className={({ isActive }) => (isActive ? cx(value.active) : '')}>
                         <span className={cx('icon')}>{value.icon}</span>
                         <span className={cx('item')}>{value.title}</span>

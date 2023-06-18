@@ -29,7 +29,6 @@ function CapNhatLopItem(props) {
             <table className={cx('table')}>
                 <thead>
                     <tr>
-                        <th>STT</th>
                         <th>Mã lớp</th>
                         <th>Tên lớp</th>
                         <th>Mã nhóm</th>
@@ -43,24 +42,23 @@ function CapNhatLopItem(props) {
                     {Array.isArray(currentItems) &&
                         currentItems.map((value, index) => (
                             <tr key={value.malop}>
-                                <td>{(index + 1) * itemOffset}</td>
                                 <td>{value.malop}</td>
                                 <td style={{ minWidth: 320 }}>{value.tenlop}</td>
                                 <td>{value.manhom}</td>
                                 <td>{value.tennhom}</td>
                                 <td>
-                                    <button className={cx('table-icon')}>
+                                    <button className={cx('table-icon')} onClick={() => props.reviewPost(value.malop)}>
                                         <FontAwesomeIcon icon={faEye} />
                                     </button>
                                 </td>
                                 <td>
                                     <button className={cx('table-icon')}>
-                                        <FontAwesomeIcon icon={faPenToSquare} />
+                                        <FontAwesomeIcon icon={faPenToSquare} onClick={() => props.editPost(value.malop)}/>
                                     </button>
                                 </td>
                                 <td>
                                     <button className={cx('table-icon')}>
-                                        <FontAwesomeIcon icon={faXmark} />
+                                        <FontAwesomeIcon icon={faXmark} onClick={() => props.deletePost(value.malop)}/>
                                     </button>
                                 </td>
                             </tr>

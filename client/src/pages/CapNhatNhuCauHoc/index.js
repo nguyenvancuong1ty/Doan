@@ -8,12 +8,17 @@ import CapNhatNhuCauHocItem from './CapNhatNhuCauHocItem';
 import axios from 'axios';
 import { ModalPopper } from '../ModalPopper';
 import ModuleCapNhatNhuCauHoc from '../ModalPopper/CapNhatNhuCauHoc/ModuleCapNhatNhuCauHoc';
+import ReviewCapNhatNhuCauHoc from '../ModalPopper/CapNhatNhuCauHoc/ReviewCapNhatNhuCauHoc';
+import EditCapNhatNhuCauHoc from '../ModalPopper/CapNhatNhuCauHoc/EditCapNhatNhuCauHoc';
 
 const cx = classNames.bind(styles)
 function CapNhatNhuCauHoc() {
     const [modalOpen, setModalOpen] = useState(false);
     const [persons, setPersons] = useState([]);
     const [query, setQuery] = useState('');
+    const [modalReview, setModalReview] = useState(false);
+    const [modalEdit, setModalEdit] = useState(false);
+    const [viewPost, setViewPost] = useState([]);
 
     useEffect(() => {
         const layDuLieu = async () => {
@@ -34,6 +39,42 @@ function CapNhatNhuCauHoc() {
         };
         layDuLieu();
     }, [query]);
+    const reviewPost = async (id) => {
+        await axios
+            .get(`http://localhost:3000/v1/api/nhucauhoc/${id}`)
+            .then((res) => {
+                const persons = res.data;
+                setViewPost(persons);
+            })
+            .catch((error) => console.log(error));
+
+        setModalReview(true);
+    };
+    const editPost = async (id) => {
+        await axios
+            .get(`http://localhost:3000/v1/api/nhucauhoc/${id}`)
+            .then((res) => {
+                const persons = res.data;
+                setViewPost(persons);
+            })
+            .catch((error) => console.log(error));
+        setModalEdit(true);
+    };
+    const deletePost = async (id) => {
+        if ( window.confirm('Bạn có chắc chắn muốn xóa nhu cầu học này không?')) {
+            await axios.patch(`http://localhost:3000/v1/api/nhucauhoc/${id}`,`manhucau: ${id}`,
+        {
+            headers:{
+                Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NzA1NzAyNSwiZXhwIjoxNjg3MDYwNjI1fQ.IcNmfK7--ZfeBE_uyXLiwxp4Blqp-867_0N6I977tN4`
+            }
+        })
+            .then((res) => {
+                alert('Bạn đã xóa thành công nhu cầu học học!')
+                window.location.reload();
+            })
+            .catch((error) => console.log(error));
+        } 
+    };
     return (
         <>
             <div className={cx('wrapper')}>
@@ -47,7 +88,7 @@ function CapNhatNhuCauHoc() {
                                 setModalOpen(true);
                             }}
                         >
-                            <FontAwesomeIcon icon={faUserPlus} />
+                            <FontAwesomeIcon icon={faUserPlus}/>
                         </Button>
                     </div>
                     <div className={cx('box-body')}>
@@ -59,13 +100,27 @@ function CapNhatNhuCauHoc() {
                                 onChange={(e) => setQuery(e.target.value)}
                             />
                         </div>
-                        <CapNhatNhuCauHocItem data={persons}/>
+                        <CapNhatNhuCauHocItem data={persons} viewPost={viewPost} reviewPost={reviewPost} editPost={editPost} deletePost={deletePost}/>
                     </div>
                 </div>
             </div>
             {modalOpen && (
                 <ModalPopper setOpenModal={setModalOpen}>
                     <ModuleCapNhatNhuCauHoc setOpenModal={setModalOpen} />
+                </ModalPopper>
+            )}
+            {modalReview && (
+                <ModalPopper setOpenModal={setModalReview}>
+                    <ReviewCapNhatNhuCauHoc
+                        setModalReview={setModalReview}
+                        viewPost={viewPost}
+                        setModalEdit={setModalEdit}
+                    />
+                </ModalPopper>
+            )}
+            {modalEdit && (
+                <ModalPopper setOpenModal={setModalEdit}>
+                    <EditCapNhatNhuCauHoc setModalEdit={setModalEdit} viewPost={viewPost}/>
                 </ModalPopper>
             )}
         </>

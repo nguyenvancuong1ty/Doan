@@ -26,8 +26,7 @@ function ModuleCapNhatNhomLop({ setOpenModal }) {
         await axios
             .post('http://localhost:3000/v1/api/nhomlop', inputData, {
                 headers: {
-                    Authorization:
-                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDYxMzM5MiwiZXhwIjoxNjg0NjE2OTkyfQ.QqJp9b6HX_kDQGpc2_7O6DXWhrcX-7ppQOFPPv666Ko',
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
                 },
             })
             .then((res) => {
@@ -38,6 +37,7 @@ function ModuleCapNhatNhomLop({ setOpenModal }) {
             })
             .catch((err) => console.log(err));
     };
+    console.log('Bearer ' + localStorage.getItem('token'));
     return (
         <>
             <h2 className={cx('title')}>Thêm nhóm học</h2>

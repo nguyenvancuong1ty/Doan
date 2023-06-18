@@ -28,7 +28,6 @@ function DangKyNhuCauHocItem (props){
                 <thead>
                     <tr>
                         <th>Mã đăng ký</th>
-                        <th>Ngày đăng ký</th>
                         <th>Tài khoản đăng ký</th>
                         <th>Mã nhu cầu</th>
                         <th>Xem chi tiết</th>
@@ -41,21 +40,20 @@ function DangKyNhuCauHocItem (props){
                         currentItems.map((value, index) => (
                             <tr key={index}>
                                 <td>{value.madangky}</td>
-                                <td>{value.ngaydangky}</td>
-                                <td>{value.taikhoandki}</td>
-                                <td>{value.manhucau}</td>
+                                <td>{value.username}</td>
+                                <td>{value.tennhucau}</td>
                                 <td>
-                                    <button className={cx('table-icon')}>
+                                    <button className={cx('table-icon')} onClick={() => props.reviewPost(value.madangky)}>
                                         <FontAwesomeIcon icon={faEye} />
                                     </button>
                                 </td>
                                 <td>
-                                    <button className={cx('table-icon')}>
+                                    <button className={cx('table-icon')} onClick={() => props.editPost(value.madangky)}>
                                         <FontAwesomeIcon icon={faPenToSquare} />
                                     </button>
                                 </td>
                                 <td>
-                                    <button className={cx('table-icon')}>
+                                    <button className={cx('table-icon')} onClick={() => props.deletePost(value.madangky)}>
                                         <FontAwesomeIcon icon={faXmark} />
                                     </button>
                                 </td>

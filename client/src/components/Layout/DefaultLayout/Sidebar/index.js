@@ -9,10 +9,13 @@ import images from '~/assets/images';
 import SideItem from './SideItem';
 import { faBars, faUser, faBook, faChartLine, faCog, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Image from '~/components/Images';
+import { useSelector } from 'react-redux';
 // import { Wrapper as PropperWrapper } from '../../Popper';
 
 const cx = classNames.bind(styles);
-
+const handleLogOut = () => {
+    localStorage.clear()
+}
 const SIDE_ITEM = [
     {
         id: 1,
@@ -79,9 +82,10 @@ const SIDE_ITEM = [
     {
         id: 7,
         icon: <FontAwesomeIcon icon={faRightFromBracket} />,
-        link: '/f',
+        link: '/',
         title: 'Thoát',
         active: 'active',
+        onClick : handleLogOut
     },
 ];
 
@@ -90,6 +94,8 @@ function Sidebar({ children }) {
     const [visible, setVisible] = useState(false);
     const show = () => setVisible(true);
     const hidee = () => setVisible(false);
+    const avatar = useSelector((state) => state.avatarReducer.avatar)
+    console.log(avatar);
     return (
         <div className={cx('wrapper')}>
             <div className={hide ? cx('section') : cx('section', 'sectionFull')}>
@@ -117,8 +123,8 @@ function Sidebar({ children }) {
             {hide && (
                 <div className={cx('sidebar')}>
                     <div className={cx('profile')}>
-                        <Image src={images.adminLogin} alt="profile_picture" />
-                        <h3>Anamika Roy</h3>
+                        <Image src={avatar.avatar || images.adminLogin} alt="profile_picture" />
+                        <h3>{avatar.username}</h3>
                         <p>Designer</p>
                     </div>
                     <ul>

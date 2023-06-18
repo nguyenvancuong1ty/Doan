@@ -1,141 +1,128 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from '~/components/Button';
 import classNames from 'classnames/bind';
 import styles from '../ModalPopper.module.scss';
-// import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function ModuleDangKyNhuCauHoc({setOpenModal}) {
-    const [inputData, setInputData] = useState({masv:'', fullname:'', brithday:'', address: '', email: '', phone: ''});
+    const [inputData, setInputData] = useState({madangky:'', taikhoandki:'', manhucau:''});
     const textErr = useRef();
-    // const navigat = useNavigate()
+    const navigat = useNavigate()
+    const [persons, setPersons] = useState([]);
+    const [persons1, setPersons1] = useState([]);
+    useEffect(() => {
+        const layDuLieu = async () => {
+            try {
+                const url =`http://localhost:3000/v1/api/users`
+                await axios
+                    .get(url)
+                    .then((res) => {
+                        const persons = res.data.data;
+                        setPersons(persons);
+                    })
+                    .catch((error) => console.log(error));
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        layDuLieu();
+    }, []);
+    useEffect(() => {
+        const layDuLieu = async () => {
+            try {
+                const url =`http://localhost:3000/v1/api/nhucauhoc`
+                await axios
+                    .get(url)
+                    .then((res) => {
+                        const persons = res.data.data;
+                        setPersons1(persons);
+                    })
+                    .catch((error) => console.log(error));
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        layDuLieu();
+    }, []);
     const handleSumit = async (e) => {
         e.preventDefault();
-        if (!inputData.masv) {
+        if (!inputData.madangky) {
             textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
             return;
         }
-        if (!inputData.fullname) {
+        if (!inputData.taikhoandki) {
             textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
             return;
         }
-        if (!inputData.brithday) {
-            textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
-            return;
-        }
-        if (!inputData.address) {
-            textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
-            return;
-        }
-        if (!inputData.email) {
-            textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
-            return;
-        }
-        if (!inputData.phone) {
+        if (!inputData.manhucau) {
             textErr.current.innerText = 'Vui lòng điền đầy đủ thông tin';
             return;
         }
          else {
-            // console.log({ masv, fullname });
+            // console.log(inputData);
             textErr.current.innerText = '';
         }
-        // await axios.post('http://localhost:3000/v1/api/nhomlop',inputData,
-        // {
-        //     headers:{
-        //         "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NDYxMzM5MiwiZXhwIjoxNjg0NjE2OTkyfQ.QqJp9b6HX_kDQGpc2_7O6DXWhrcX-7ppQOFPPv666Ko"
-        //     }
-        // })
-        // .then(res => {
-        //     alert("Đã thêm thành công")
-        //     navigat("/capnhatnhomlop")
-        //     setOpenModal(false)
-        //     window.location.reload();
-        // }).catch(err => console.log(err))
+        await axios
+            .post('http://localhost:3000/v1/api/dknhucau', inputData, {
+                headers: {
+                    Authorization:
+                        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NzA2MDY5MywiZXhwIjoxNjg3MDY0MjkzfQ.9HFoiD5u32WCYMeXVz_jLENYCfdFwJHeH_tWndDyflA`,
+                },
+            })
+            .then((res) => {
+                alert('Đã thêm Đăng ký nhu cầu học thành công');
+                navigat('/dangkynhucauhoc');
+                setOpenModal(false);
+                window.location.reload();
+            })
+            .catch((err) => console.log(err));
     };
     
   return (
     <>
-            <h2 className={cx('title')}>Thêm thông tin học viên</h2>
+            <h2 className={cx('title')}>Đăng ký nhu cầu học</h2>
             <p className={cx('item-left__error')} ref={textErr}></p>
             <div className={cx('body')}>
                 <div className={cx('group-form')}>
-                    <label htmlFor="masinhvien">
-                        Mã SV <span>*</span>:
+                    <label htmlFor="">
+                        Mã đăng ký <span>*</span>:
                     </label>
                     <input
                         type="text"
-                        id="masinhvien"
-                        name="masinhvien"
-                        placeholder="Mã sinh viên"
-                        value={inputData.masv}
-                        onChange={(e) => setInputData({...inputData, masv: e.target.value})}
+                        id="madangky"
+                        name="madangky"
+                        placeholder="Mã đăng ký"
+                        value={inputData.madangky}
+                        onChange={(e) => setInputData({...inputData, madangky: e.target.value})}
                     />
                 </div>
                 <div className={cx('group-form')}>
-                    <label htmlFor="hovaten">
-                        Họ và tên <span>*</span>:
+                    <label htmlFor="">
+                        Tài khoản đăng ký <span>*</span>:
                     </label>
-                    <input
-                        type="text"
-                        id="hovaten"
-                        name="hovaten"
-                        placeholder="Họ và tên"
-                        value={inputData.fullname}
-                        onChange={(e) => setInputData({...inputData, fullname: e.target.value})}
-                    />
+                    <select onChange={(e) => setInputData({...inputData, taikhoandki: e.target.value})} value={inputData.taikhoandki}>
+                        <option value="0">Chọn tài khoản</option>
+                        {
+                            persons.map(data => (
+                                <option key={data.id} value={data.id}>{data.username}</option>
+                            ))
+                        }
+                    </select>
                 </div>
                 <div className={cx('group-form')}>
-                    <label htmlFor="ngaysinh">
-                        Ngày sinh <span>*</span>:
+                    <label htmlFor="">
+                        Nhu cầu học <span>*</span>:
                     </label>
-                    <input
-                        type="date"
-                        id="ngaysinh"
-                        name="ngaysinh"
-                        placeholder="Ngày sinh"
-                        value={inputData.brithday}
-                        onChange={(e) => setInputData({...inputData, brithday: e.target.value})}
-                    />
-                </div>
-                <div className={cx('group-form')}>
-                    <label htmlFor="diachi">
-                        Địa chỉ <span>*</span>:
-                    </label>
-                    <input
-                        type="text"
-                        id="diachi"
-                        name="diachi"
-                        placeholder="Địa chỉ"
-                        value={inputData.address}
-                        onChange={(e) => setInputData({...inputData, address: e.target.value})}
-                    />
-                </div>
-                <div className={cx('group-form')}>
-                    <label htmlFor="email">
-                        Email <span>*</span>:
-                    </label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Email"
-                        value={inputData.email}
-                        onChange={(e) => setInputData({...inputData, email: e.target.value})}
-                    />
-                </div>
-                <div className={cx('group-form')}>
-                    <label htmlFor="phone">
-                        Phone <span>*</span>:
-                    </label>
-                    <input
-                        type="email"
-                        id="phone"
-                        name="phone"
-                        placeholder="Số điện thoại"
-                        value={inputData.phone}
-                        onChange={(e) => setInputData({...inputData, phone: e.target.value})}
-                    />
+                    <select onChange={(e) => setInputData({...inputData, manhucau: e.target.value})} value={inputData.manhucau}>
+                        <option value="0">Chọn nhu cầu học</option>
+                        {
+                            persons1.map(data => (
+                                <option key={data.manhucau} value={data.manhucau}>{data.tennhucau}</option>
+                            ))
+                        }
+                    </select>
                 </div>
             </div>
             <div className={cx('footer')}>

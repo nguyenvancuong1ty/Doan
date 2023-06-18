@@ -8,12 +8,11 @@ import DiemDanh from '~/pages/DiemDanh';
 import Home from '~/pages/Home';
 import Login from '~/pages/Login';
 import Upload from '~/pages/Upload';
-
 // Không cần đăng nhập vẫn xem được
-const publicRouter = [
-    { path: '/', component: Home },
+const publicRouter = [ 
+    { exact: 'exact', path: '/', component: Login, layout: null },
+    { path: '/home', component: Home },
     { path: '/upload', component: Upload },
-    { path: '/login', component: Login, layout: null },
     { path: '/capnhatlop', component: CapNhatLop },
     { path: '/capnhatnhomlop', component: CapNhatNhomLop },
     { path: '/capnhatnhucauhoc', component: CapNhatNhuCauHoc },
@@ -24,7 +23,9 @@ const publicRouter = [
 ];
 
 // Đăng nhập mới xem được
-const privateRouter = [];
+const privateRouter = [
+    
+];
 
 export { publicRouter, privateRouter };
 

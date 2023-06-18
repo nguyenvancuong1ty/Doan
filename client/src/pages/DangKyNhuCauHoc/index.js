@@ -8,12 +8,17 @@ import axios from 'axios';
 import DangKyNhuCauHocItem from './DangKyNhuCauHocItem';
 import { ModalPopper } from '../ModalPopper';
 import ModuleDangKyNhuCauHoc from '../ModalPopper/DangKyNhuCauHoc/ModuleDangKyNhuCauHoc';
+import ReviewDangKyNhuCauHoc from '../ModalPopper/DangKyNhuCauHoc/ReviewDangKyNhuCauHoc';
+import EditDangKyNhuCauHoc from '../ModalPopper/DangKyNhuCauHoc/EditDangKyNhuCauHoc';
 const cx = classNames.bind(styles)
 
 const DangKyNhuCauHoc = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [persons, setPersons] = useState([]);
     const [query, setQuery] = useState('');
+    const [modalReview, setModalReview] = useState(false);
+    const [modalEdit, setModalEdit] = useState(false);
+    const [viewPost, setViewPost] = useState([]);
     useEffect(() => {
         const layDuLieu = async () => {
             try {
@@ -33,6 +38,42 @@ const DangKyNhuCauHoc = () => {
         };
         layDuLieu();
     }, [query]);
+    const deletePost = async (id) => {
+        if ( window.confirm('Bạn có chắc chắn muốn xóa nhu cầu học này không?')) {
+            await axios.patch(`http://localhost:3000/v1/api/dknhucau/${id}`,`madangky: ${id}`,
+        {
+            headers:{
+                Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NzA2MDY5MywiZXhwIjoxNjg3MDY0MjkzfQ.9HFoiD5u32WCYMeXVz_jLENYCfdFwJHeH_tWndDyflA`
+            }
+        })
+            .then((res) => {
+                alert('Bạn đã xóa thành công nhu cầu học học!')
+                window.location.reload();
+            })
+            .catch((error) => console.log(error));
+        } 
+    };
+    const reviewPost = async (id) => {
+        await axios
+            .get(`http://localhost:3000/v1/api/dknhucau/${id}`)
+            .then((res) => {
+                const persons = res.data;
+                setViewPost(persons);
+            })
+            .catch((error) => console.log(error));
+
+        setModalReview(true);
+    };
+    const editPost = async (id) => {
+        await axios
+            .get(`http://localhost:3000/v1/api/dknhucau/${id}`)
+            .then((res) => {
+                const persons = res.data;
+                setViewPost(persons);
+            })
+            .catch((error) => console.log(error));
+        setModalEdit(true);
+    };
     return (
         <>
             <div className={cx('wrapper')}>
@@ -58,13 +99,27 @@ const DangKyNhuCauHoc = () => {
                                 onChange={(e) => setQuery(e.target.value)}
                             />
                         </div>
-                        <DangKyNhuCauHocItem data={persons}/>
+                        <DangKyNhuCauHocItem data={persons} viewPost={viewPost} reviewPost={reviewPost} editPost={editPost} deletePost={deletePost}/>
                     </div>
                 </div>
             </div>
             {modalOpen && (
                 <ModalPopper setOpenModal={setModalOpen}>
                     <ModuleDangKyNhuCauHoc setOpenModal={setModalOpen} />
+                </ModalPopper>
+            )}
+            {modalReview && (
+                <ModalPopper setOpenModal={setModalReview}>
+                    <ReviewDangKyNhuCauHoc
+                        setModalReview={setModalReview}
+                        viewPost={viewPost}
+                        setModalEdit={setModalEdit}
+                    />
+                </ModalPopper>
+            )}
+            {modalEdit && (
+                <ModalPopper setOpenModal={setModalEdit}>
+                    <EditDangKyNhuCauHoc setModalEdit={setModalEdit} viewPost={viewPost}/>
                 </ModalPopper>
             )}
         </>

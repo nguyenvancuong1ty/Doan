@@ -32,28 +32,30 @@
     }
     .body {
         .group-form {
-            display: flex;
-            align-items: center;
+            // display: flex;
+            // align-items: center;
             margin-bottom: 16px;
-            justify-content: center;
+            // justify-content: center;
             label {
                 font-size: 1.6rem;
                 color: #222;
                 margin-right: 12px;
-                min-width: 90px;
-                max-width: 120px;
-                text-align: center;
+                margin-bottom: 8px;
+                display: block;
+                font-weight: 600;
                 span{
                     color: rgb(223, 21, 21);
                 }
             }
+            select,
             input {
                 padding: 8px 16px;
                 font-size: 1.6rem;
                 border: 1px solid #ccc;
                 outline: none;
-                width: 76%;
+                width: 100%;
                 color: #222;
+
             }
         }
     }

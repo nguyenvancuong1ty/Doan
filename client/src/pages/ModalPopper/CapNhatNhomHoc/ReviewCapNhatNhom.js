@@ -8,6 +8,7 @@ function ReviewCapNhatNhom({ setModalReview, viewPost, setModalEdit }) {
     const handleClick = () => {
         setModalReview(false);
         setModalEdit(true)
+        // console.log(localStorage.getItem('token'))
     }
     return (
         <>
@@ -29,6 +30,7 @@ function ReviewCapNhatNhom({ setModalReview, viewPost, setModalEdit }) {
             <div className={cx('footer')}>
                 <Button
                     onClick={() => {
+                        console.log(localStorage.getItem('token'))
                         setModalReview(false);
                     }}
                     primary

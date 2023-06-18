@@ -48,18 +48,21 @@ function CapNhatNhomLop() {
     };
     const deletePost = async (id) => {
         // Phần xóa tham khảo link: https://hocwebchuan.com/tutorial/reactjs/reactjs_mysql_delete.php
-
-        // Xóa khi gọi api
-        await axios
-            .delete(`http://localhost:3000/v1/api/nhomlop/${id}`)
+        if ( window.confirm('Bạn có chắc chắn muốn xóa nhóm lớp này không?')) {
+            await axios.patch(`http://localhost:3000/v1/api/nhomlop/${id}`,`manhom: ${id}`,
+        {
+            headers:{
+                Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NzAyMTUxMCwiZXhwIjoxNjg3MDI1MTEwfQ.rwg6YU_9Q9JqELlSG5Y01BEVzrL7-QPF9v4jWBaL4tY`
+            }
+        })
             .then((res) => {
-                setPost(
-                    post.filter((item) => {
-                        return item.id !== id;
-                    }),
-                );
+                alert('Bạn đã xóa thành công nhóm học!')
+                window.location.reload();
             })
             .catch((error) => console.log(error));
+        } 
+        // Xóa khi gọi api
+        
 
         //    Xóa bên người dùng khi F5 sẽ hiện lại
         // let dulieu = post;

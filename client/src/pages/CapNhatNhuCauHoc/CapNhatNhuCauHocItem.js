@@ -41,18 +41,18 @@ function CapNhatNhuCauHocItem (props){
                                 <td>{value.manhucau}</td>
                                 <td style={{ minWidth: 320 }}>{value.tennhucau}</td>
                                 <td>
-                                    <button className={cx('table-icon')}>
+                                    <button className={cx('table-icon')} onClick={() => props.reviewPost(value.manhucau)}>
                                         <FontAwesomeIcon icon={faEye} />
                                     </button>
                                 </td>
                                 <td>
-                                    <button className={cx('table-icon')}>
+                                    <button className={cx('table-icon')} onClick={() => props.editPost(value.manhucau)}>
                                         <FontAwesomeIcon icon={faPenToSquare} />
                                     </button>
                                 </td>
                                 <td>
-                                    <button className={cx('table-icon')}>
-                                        <FontAwesomeIcon icon={faXmark} />
+                                    <button className={cx('table-icon')} onClick={() => props.deletePost(value.manhucau)}>
+                                        <FontAwesomeIcon icon={faXmark}/>
                                     </button>
                                 </td>
                             </tr>
