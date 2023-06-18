@@ -22,10 +22,24 @@ const pagination = async ({ limit, page }) => {
     }
 };
 
+const createMulti = async ({ data }) => {
+    // const data = [
+    //     [123456789, 4, new Date().getTime(), true],
+    //     [123456790, 5, new Date().getTime(), false],
+    // ];
+    const sql = 'insert into DiemDanh(id_student,id_course,date, status) values ?';
+    try {
+        const [result] = await connection.query(sql, [data]);
+        return result;
+    } catch (e) {
+        return false;
+    }
+};
+
 const create = async ({ id_student, id_course, status }) => {
     const sql = 'insert into DiemDanh(id_student,id_course,date, status) values(?,?,?,?)';
     try {
-        const [result] = await connection.query(sql, [id_student, id_course, date, status]);
+        const [result] = await connection.query(sql, [id_student, id_course, new Date().getTime(), status]);
         return result;
     } catch (e) {
         return false;
@@ -73,4 +87,4 @@ const getByName = async ({ search }) => {
     }
 };
 
-module.exports = { create, update, deleted, getAll, pagination, getById, getByName };
+module.exports = { create, update, deleted, getAll, pagination, getById, getByName, createMulti };

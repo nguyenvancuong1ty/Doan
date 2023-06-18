@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const { create, deleted, update, getAll, pagination, getById, getByName } = require('../model/Student');
 const { Authorization } = require('../middleware/Authorization');
+const connection = require('../config/connect');
 require('dotenv').config();
 
 const apiGetStudentByName = async (req, res) => {
@@ -66,10 +67,18 @@ const apiGetStudent = async (req, res) => {
 
 const apiCreateStudent = async (req, res) => {
     try {
-        const { id_account, fullname, brithday, id_teacher, id_course, address, phone, email } = req.body;
+        const { masv,id_account, fullname, brithday, id_teacher, id_course, address, phone, email, username, password } =
+            req.body;
         const isAdmin = Authorization(req);
         if (isAdmin) {
+            // connection.query('BEGIN', async (err) => {
+            //     if (err) {
+            //         return res.status(500).json({
+            //             message: err.message,
+            //         });
+            //     } else {
             const result = await create({
+                masv,
                 id_account,
                 fullname,
                 brithday,
@@ -78,7 +87,10 @@ const apiCreateStudent = async (req, res) => {
                 address,
                 phone,
                 email,
+                username,
+                password,
             });
+
             if (result) {
                 if (result.exists) {
                     return res.status(409).json({
@@ -93,6 +105,8 @@ const apiCreateStudent = async (req, res) => {
                     message: 'not found',
                 });
             }
+            // }
+            // });
         } else {
             return res.status(403).json({
                 message: 'Forbidden',

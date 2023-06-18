@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { create, deleted, update, getAll, pagination, getByName, getById } = require('../model/DiemDanh');
+const { create, deleted, update, getAll, pagination, getByName, getById, createMulti } = require('../model/DiemDanh');
 const { Authorization } = require('../middleware/Authorization');
 require('dotenv').config();
 
@@ -93,6 +93,32 @@ const apiCreateDiemDanh = async (req, res) => {
     }
 };
 
+const apiCreateMultiDiemDanh = async (req, res) => {
+    try {
+        const { data } = req.body;
+        const isAdmin = Authorization(req);
+        if (isAdmin) {
+            const result = await createMulti({ data });
+            if (result) {
+                return res.status(200).json({
+                    message: 'Create DiemDanh ok',
+                });
+            } else {
+                return res.status(404).json({
+                    message: 'Data not found',
+                });
+            }
+        } else {
+            return res.status(403).json({
+                message: 'Forbidden',
+            });
+        }
+    } catch (e) {
+        return res.status(500).json({
+            message: e.message,
+        });
+    }
+};
 const apiDeleteDiemDanh = async (req, res) => {
     try {
         const { id } = req.body;
@@ -170,4 +196,5 @@ module.exports = {
     apiGetDiemDanh,
     apiDiemDanhPagination,
     apiGetDiemDanhById,
+    apiCreateMultiDiemDanh,
 };

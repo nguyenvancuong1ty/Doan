@@ -17,6 +17,7 @@ const {
     apiDiemDanhPagination,
     apiGetDiemDanhById,
     apiGetDiemDanhByName,
+    apiCreateMultiDiemDanh,
 } = require('../controllers/DiemDanhController');
 const {
     apiGetNhuCauHoc,
@@ -106,6 +107,7 @@ router.get('/attendance/search', apiGetDiemDanhByName);
 router.get('/attendance', apiGetDiemDanh);
 router.get('/attendance/:id', apiGetDiemDanhById);
 router.post('/attendance', apiCreateDiemDanh);
+router.post('/attendance-multi', apiCreateMultiDiemDanh);
 router.put('/attendance/:id', apiUpdateDiemDanh);
 router.patch('/attendance/:id', apiDeleteDiemDanh);
 router.get('/attendance/pagination', apiDiemDanhPagination);
