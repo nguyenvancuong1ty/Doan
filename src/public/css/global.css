@@ -1,0 +1,19 @@
+:root {
+    --bgcolor--: #2d2d2d;
+    --primary-color--: #a50a06;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: Tahoma;
+    font-size: 14px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
