@@ -10,10 +10,10 @@ const getAll = async () => {
     }
 };
 
-const create = async ({ tennhucau }) => {
-    const sql = 'insert into nhucauhoc(tennhucau) values(?)';
+const create = async ({manhucau, tennhucau }) => {
+    const sql = 'insert into nhucauhoc(manhucau, tennhucau) values(?,?)';
     try {
-        const [result] = await connection.query(sql, [tennhucau]);
+        const [result] = await connection.query(sql, [manhucau,tennhucau]);
         return result;
     } catch (e) {
         return false;

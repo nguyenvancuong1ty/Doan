@@ -43,7 +43,7 @@ const deleted = async ({ id }) => {
 };
 
 const update = async ({ tenlop, manhom, id }) => {
-    const sql = 'update Lop set malop =?, tenlop =?, manhom =? where malop = ?';
+    const sql = 'update Lop set tenlop =?, manhom =? where malop = ?';
     try {
         const [result] = await connection.query(sql, [tenlop, manhom, id]);
         return result;
@@ -63,7 +63,7 @@ const pagination = async ({ limit, page }) => {
     }
 };
 const getById = async ({ id }) => {
-    const sql = 'select * from diemdanh where deleted = false and id = ?';
+    const sql = 'select * from Lop inner join nhomlop on lop.manhom = nhomlop.manhom where Lop.deleted = false and malop = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;

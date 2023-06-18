@@ -1,7 +1,7 @@
 const connection = require('../config/connect');
 
 const getAll = async () => {
-    const sql = 'select * from dknhucauhoc where deleted = false';
+    const sql = 'select * from dkinhucauhoc join account on account.id = dkinhucauhoc.taikhoandki left join nhucauhoc on nhucauhoc.manhucau = dkinhucauhoc.manhucau where dkinhucauhoc.deleted = false';
     try {
         const [result] = await connection.query(sql);
         return result;
@@ -10,10 +10,10 @@ const getAll = async () => {
     }
 };
 
-const create = async ({ ngaydangky, taikhoandki, manhucau }) => {
-    const sql = 'insert into dknhucauhoc(ngaydangky, taikhoandki, manhucau) values(?)';
+const create = async ({ madangky, taikhoandki, manhucau }) => {
+    const sql = 'insert into dkinhucauhoc(madangky, taikhoandki, manhucau) values(?,?,?)';
     try {
-        const [result] = await connection.query(sql, [ngaydangky, taikhoandki, manhucau]);
+        const [result] = await connection.query(sql, [madangky, taikhoandki, manhucau]);
         return result;
     } catch (e) {
         return false;
@@ -21,7 +21,7 @@ const create = async ({ ngaydangky, taikhoandki, manhucau }) => {
 };
 
 const deleted = async ({ id }) => {
-    const sql = 'update dknhucauhoc set deleted = true where madangky = ?';
+    const sql = 'update dkinhucauhoc set deleted = true where madangky = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;
@@ -30,17 +30,17 @@ const deleted = async ({ id }) => {
     }
 };
 
-const update = async ({ tennhucau, id }) => {
-    const sql = 'update dknhucauhoc set tennhucau = ? where id = ?';
+const update = async ({ manhucau, madangky, taikhoandki }) => {
+    const sql = 'update dkinhucauhoc set manhucau = ?,taikhoandki = ? where madangky = ?';
     try {
-        const [result] = await connection.query(sql, [tennhucau, id]);
+        const [result] = await connection.query(sql, [manhucau,taikhoandki, madangky]);
         return result;
     } catch (e) {
         return false;
     }
 };
 const getById = async ({ id }) => {
-    const sql = 'select * from dkinhucauhoc where deleted = false and madangky = ?';
+    const sql = 'select * from dkinhucauhoc join account on account.id = dkinhucauhoc.taikhoandki left join nhucauhoc on nhucauhoc.manhucau = dkinhucauhoc.manhucau where dkinhucauhoc.deleted = false and madangky = ?';
     try {
         const [result] = await connection.query(sql, [id]);
         return result;

@@ -64,10 +64,10 @@ const apiGetNhuCauHoc = async (req, res) => {
 
 const apiCreateNhuCauHoc = async (req, res) => {
     try {
-        const { tennhucau } = req.body;
+        const { manhucau, tennhucau } = req.body;
         const isAdmin = Authorization(req);
         if (isAdmin) {
-            const result = await create({ tennhucau });
+            const result = await create({manhucau, tennhucau});
             if (result) {
                 return res.status(200).json({
                     message: 'Create NhuCauHoc ok',
@@ -91,7 +91,7 @@ const apiCreateNhuCauHoc = async (req, res) => {
 
 const apiDeleteNhuCauHoc = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { id } = req.params;
         const isAdmin = Authorization(req);
         if (isAdmin) {
             const result = await deleted({ id });

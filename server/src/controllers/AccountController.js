@@ -39,6 +39,12 @@ const apiLogin = async (req, res) => {
                     process.env.SECRET,
                     { expiresIn: 60 * 60 },
                 ),
+                data: {
+                    id: data[0].id,
+                    avatar: data[0].avata,
+                    username: data[0].username,
+                    password: data[0].password,
+                },
             });
         } else {
             return res.status(401).json({
@@ -51,7 +57,6 @@ const apiLogin = async (req, res) => {
         });
     }
 };
-
 const apiGetAccount = async (req, res) => {
     try {
         const result = await Account.getAll();

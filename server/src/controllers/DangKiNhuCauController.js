@@ -66,10 +66,10 @@ const apiGetDangKyNhuCau = async (req, res) => {
 
 const apiCreateDangKyNhuCau = async (req, res) => {
     try {
-        const { ngaydangky, taikhoandki, manhucau } = req.body;
+        const { madangky, taikhoandki, manhucau } = req.body;
         const isAdmin = Authorization(req);
         if (isAdmin) {
-            const result = await create({ ngaydangky, taikhoandki, manhucau });
+            const result = await create({ madangky, taikhoandki, manhucau });
             if (result) {
                 return res.status(200).json({
                     message: 'Create DangKyNhuCau ok',
@@ -93,7 +93,7 @@ const apiCreateDangKyNhuCau = async (req, res) => {
 
 const apiDeleteDangKyNhuCau = async (req, res) => {
     try {
-        const { id } = req.body;
+        const { id } = req.params;
         const isAdmin = Authorization(req);
         if (isAdmin) {
             const result = await deleted({ id });
@@ -120,17 +120,24 @@ const apiDeleteDangKyNhuCau = async (req, res) => {
 
 const apiUpdateDangKyNhuCau = async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { taikhoandki,manhucau } = req.body;
         const { id } = req.params;
-        const hash = bcrypt.hashSync(password, 8);
-        const result = await update({ username, hash, id });
-        if (result) {
-            return res.status(200).json({
-                message: 'Update DangKyNhuCau ok',
-            });
+        const isAdmin = Authorization(req);
+        if (isAdmin) {
+            const result = await update({ manhucau, taikhoandki, id });
+            if (result) {
+                return res.status(200).json({
+                    message: 'Update NhomLop ok',
+                });
+            } else {
+                f;
+                return res.status(404).json({
+                    message: 'data not found',
+                });
+            }
         } else {
-            return res.status(401).json({
-                message: 'invalid username or password',
+            return res.status(403).json({
+                message: 'Forbidden',
             });
         }
     } catch (e) {
@@ -138,7 +145,7 @@ const apiUpdateDangKyNhuCau = async (req, res) => {
             message: e.message,
         });
     }
-};
+}
 
 module.exports = {
     apiGetDangKyNhuCauByName,
