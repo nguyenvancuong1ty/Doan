@@ -45,7 +45,7 @@ function EditCapNhatLop({ setModalEdit, viewPost }) {
         await axios.put(`http://localhost:3000/v1/api/lop/${inputData.malop}`,inputData,
         {
             headers:{
-                Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NzAyMTUxMCwiZXhwIjoxNjg3MDI1MTEwfQ.rwg6YU_9Q9JqELlSG5Y01BEVzrL7-QPF9v4jWBaL4tY`
+                Authorization:"Bearer "+localStorage.getItem('token')
             }
         })
         .then(res => {

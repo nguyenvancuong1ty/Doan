@@ -47,3 +47,18 @@
     padding: 9px;
     margin-left: 12px;
 }
+
+.diemdanh{
+    font-size: 16px;
+    padding: 8px 24px;
+    margin-bottom: 16px;
+    background-color: #fe2c55;
+    max-width: 200px;
+    color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    &:hover{
+        background: linear-gradient(0deg, rgba(0,0,0,0.06), rgba(0,0,0,0.06)), #fe2c55;
+    }
+}

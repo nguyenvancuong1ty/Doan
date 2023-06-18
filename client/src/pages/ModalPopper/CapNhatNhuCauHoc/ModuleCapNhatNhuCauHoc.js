@@ -26,7 +26,7 @@ function ModuleCapNhatNhuCauHoc({setOpenModal}) {
         await axios.post('http://localhost:3000/v1/api/nhucauhoc',inputData,
         {
             headers:{
-                "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NzA1NzAyNSwiZXhwIjoxNjg3MDYwNjI1fQ.IcNmfK7--ZfeBE_uyXLiwxp4Blqp-867_0N6I977tN4"
+                Authorization:"Bearer "+localStorage.getItem('token')
             }
         })
         .then(res => {

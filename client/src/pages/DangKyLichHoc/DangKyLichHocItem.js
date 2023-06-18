@@ -27,13 +27,10 @@ function DangKyLichHocItem (props){
          <table className={cx('table')}>
                 <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>Mã lịch học</th>
-                        <th>Tuần học</th>
-                        <th>Ngày học</th>
-                        <th>Ca học</th>
-                        <th>Ghi chú</th>
-                        <th>Tên tài khoản</th>
+                        <th>Mã sinh viên</th>
+                        <th>Họ và tên</th>
+                        <th>Mã lớp</th>
+                        <th>Tên lớp</th>
                         <th>Xem chi tiết</th>
                         <th>Sửa</th>
                         <th>Xóa</th>
@@ -43,13 +40,10 @@ function DangKyLichHocItem (props){
                     {Array.isArray(currentItems) &&
                         currentItems.map((value, index) => (
                             <tr key={index}>
-                                <td>{index + 1}</td>
                                 <td>{value.username}</td>
                                 <td>{value.name}</td>
                                 <td>{value.address.street}</td>
                                 <td>{value.email}</td>
-                                <td>{value.phone}</td>
-                                <td>{value.website}</td>
                                 <td>
                                     <button className={cx('table-icon')}>
                                         <FontAwesomeIcon icon={faEye} />

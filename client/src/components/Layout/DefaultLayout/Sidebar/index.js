@@ -62,7 +62,7 @@ const SIDE_ITEM = [
         id: 4,
         icon: <FontAwesomeIcon icon={faRightFromBracket} />,
         link: '/dangkylichhoc',
-        title: 'Đăng ký lịch học',
+        title: 'Đăng ký lớp học',
         active: 'active',
     },
     {
@@ -72,13 +72,13 @@ const SIDE_ITEM = [
         title: 'Điểm danh',
         active: 'active',
     },
-    {
-        id: 6,
-        icon: <FontAwesomeIcon icon={faRightFromBracket} />,
-        link: '/e',
-        title: 'Đổi mật khẩu',
-        active: 'active',
-    },
+    // {
+    //     id: 6,
+    //     icon: <FontAwesomeIcon icon={faRightFromBracket} />,
+    //     link: '/e',
+    //     title: 'Đổi mật khẩu',
+    //     active: 'active',
+    // },
     {
         id: 7,
         icon: <FontAwesomeIcon icon={faRightFromBracket} />,

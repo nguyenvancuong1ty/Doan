@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './DiemDanh.module.scss';
 import ReactPaginate from 'react-paginate';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles);
 function DiemDanhItem (props){
     const { data } = props;
@@ -27,43 +25,19 @@ function DiemDanhItem (props){
          <table className={cx('table')}>
                 <thead>
                     <tr>
-                        <th>STT</th>
-                        <th>Mã lịch học</th>
-                        <th>Tuần học</th>
-                        <th>Ngày học</th>
-                        <th>Ca học</th>
-                        <th>Ghi chú</th>
-                        <th>Tên tài khoản</th>
-                        <th>Xem chi tiết</th>
-                        <th>Sửa</th>
-                        <th>Xóa</th>
+                        <th>Mã học viên</th>
+                        <th>Tên học viên</th>
+                        <th>Điểm danh</th>
                     </tr>
                 </thead>
                 <tbody>
                     {Array.isArray(currentItems) &&
                         currentItems.map((value, index) => (
                             <tr key={index}>
-                                <td>{index + 1}</td>
-                                <td>{value.username}</td>
-                                <td>{value.name}</td>
-                                <td>{value.address.street}</td>
-                                <td>{value.email}</td>
-                                <td>{value.phone}</td>
-                                <td>{value.website}</td>
+                                <td>{value.masv}</td>
+                                <td>{value.fullname}</td>
                                 <td>
-                                    <button className={cx('table-icon')}>
-                                        <FontAwesomeIcon icon={faEye} />
-                                    </button>
-                                </td>
-                                <td>
-                                    <button className={cx('table-icon')}>
-                                        <FontAwesomeIcon icon={faPenToSquare} />
-                                    </button>
-                                </td>
-                                <td>
-                                    <button className={cx('table-icon')}>
-                                        <FontAwesomeIcon icon={faXmark} />
-                                    </button>
+                                    <input type='checkbox' className={cx('checkboxdd')}></input>
                                 </td>
                             </tr>
                         ))}

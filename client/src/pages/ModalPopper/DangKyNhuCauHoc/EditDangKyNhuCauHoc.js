@@ -69,7 +69,7 @@ function EditDangKyNhuCauHoc({ setModalEdit, viewPost }) {
         await axios.put(`http://localhost:3000/v1/api/dknhucau/${inputData.madangky}`,inputData,
         {
             headers:{
-                Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NzA2MzA2MywiZXhwIjoxNjg3MDY2NjYzfQ.idafIikXvPCEkSr1fr8zgH-dg9KTtexdRiIZvN1WoAk`
+                Authorization:"Bearer "+localStorage.getItem('token')
             }
         })
         .then(res => {

@@ -43,7 +43,7 @@ const DangKyNhuCauHoc = () => {
             await axios.patch(`http://localhost:3000/v1/api/dknhucau/${id}`,`madangky: ${id}`,
         {
             headers:{
-                Authorization:`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NzA2MDY5MywiZXhwIjoxNjg3MDY0MjkzfQ.9HFoiD5u32WCYMeXVz_jLENYCfdFwJHeH_tWndDyflA`
+                Authorization:"Bearer "+localStorage.getItem('token')
             }
         })
             .then((res) => {

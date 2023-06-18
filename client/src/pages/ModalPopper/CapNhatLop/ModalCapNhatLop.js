@@ -51,8 +51,7 @@ function ModalCapNhatLop({ setOpenModal }) {
         await axios
             .post('http://localhost:3000/v1/api/lop', inputData, {
                 headers: {
-                    Authorization:
-                        `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJuYW1lIjoiYWRtaW4iLCJwYXNzd29yZCI6ImFkbWluMTIzIn0sImlhdCI6MTY4NzA1MjU0MSwiZXhwIjoxNjg3MDU2MTQxfQ.co-UhtTZ2i0uf5ePDiJcQlnFB78w5LkTNpDBog_FyyM`,
+                    Authorization:"Bearer "+localStorage.getItem('token')
                 },
             })
             .then((res) => {

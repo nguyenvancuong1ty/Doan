@@ -35,7 +35,7 @@ function DangKyLichHoc() {
             <div className={cx('wrapper')}>
                 <div className={cx('container')}>
                     <div className={cx('box-title')}>
-                        <h1 className={cx('title')}>Đăng ký lịch học </h1>
+                        <h1 className={cx('title')}>Đăng ký lớp học </h1>
                         <Button
                             capnhatlop
                             primary
